@@ -1,0 +1,7 @@
+id_metodo,nome,descricao,data_criacao
+1,"Cartão de Crédito","Pagamentos com bandeiras Visa, MasterCard, etc.","2025-05-26 21:44:53"
+2,"Boleto Bancário","Gerar boleto para pagamento em até 3 dias.","2025-05-26 21:44:53"
+3,Pix,"Transferência imediata via chave Pix.","2025-05-26 21:44:53"
+4,PayPal,"Pagamento via conta PayPal.","2025-05-26 21:44:53"
+5,"Crédito na plataforma","Utilize saldo em conta para pagar.","2025-05-26 21:44:53"
+6,"Transferência Bancária","TED ou DOC via banco.","2025-05-26 21:44:53"
