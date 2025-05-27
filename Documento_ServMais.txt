@@ -1,0 +1,163 @@
+DOCUMENTO DE PLANEJAMENTO E DESENVOLVIMENTO DO SITE SERV+
+1. Nome do Projeto
+Serv+ — Plataforma de Conexão entre Freelancers e Contratantes
+
+2. Objetivo do Site
+O Serv+ tem como objetivo conectar contratantes a freelancers de diversas áreas, facilitando a busca por profissionais qualificados, tanto no meio digital (tecnologia) quanto no meio presencial (serviços gerais), de forma prática e acessível.
+
+3. Público-Alvo
+Pequenas e médias empresas
+
+Profissionais autônomos buscando serviços temporários
+
+Freelancers digitais e presenciais
+
+Pessoas físicas que precisam de serviços especializados
+
+4. Tecnologias Utilizadas
+HTML5: Estruturação das páginas
+
+CSS3: Estilização e responsividade
+
+JavaScript: Interatividade e comportamento dinâmico
+
+PHP (opcional): Processamento de formulários e login
+
+MySQL (opcional): Banco de dados para freelancers e anúncios
+
+Frameworks: Bootstrap (para estilização rápida e responsiva)
+
+5. Estrutura do Site
+5.1. Cabeçalho (Header)
+Logo do site (Serv+)
+
+Menu de navegação:
+
+Contato
+
+Serviços
+
+Profissionais
+
+Entrar
+
+Cadastrar
+
+5.2. Seção Principal (Hero Section)
+Mensagem de destaque:
+
+"Encontre o freelancer perfeito para você"
+
+Subtítulo: "Os melhores profissionais do mercado"
+
+Botão: “Saiba Mais”
+
+Imagem com grupo de freelancers
+
+5.3. Seção para Freelancers
+Chamada: “Você é freelancer? Junte-se à nossa equipe”
+
+Botão: Comece Agora
+
+6. Página “Contrate Agora”
+6.1. Carrossel de Imagens
+Imagens ilustrativas de diferentes tipos de serviços
+
+6.2. Tipos de Freelancer
+Freelancers Digitais:
+
+Desenvolvedor Front-End
+
+Desenvolvedor Back-End
+
+Desenvolvedor Full-Stack
+
+Mobile Developer
+
+QA Automation
+
+Data Engineer
+
+Data Scientist
+
+DevOps
+
+Freelancers Presenciais:
+
+Garçom / Garçonete
+
+Manobrista
+
+Pintor(a)
+
+Jardineiro(a)
+
+Faxineiro(a)
+
+Encanador(a)
+
+Eletricista
+
+Ajudante de pedreiro
+
+7. Filtros e Busca
+Seção com filtros:
+
+Tipo: Digital ou Presencial
+
+Especialidade
+
+Região: Zona Sul, Norte, Leste, Oeste
+
+8. Lista de Anúncios
+Anúncios dos usuários com o seguinte formato:
+
+Nome de usuário
+
+Descrição da necessidade, ex:
+
+"Preciso de alguém para desenvolver um site para minha empresa"
+
+"Preciso de alguém para subir anúncios para meu negócio"
+
+9. Funcionalidades Futuras (Opcional)
+Sistema de login/cadastro com autenticação
+
+Área do cliente/freelancer
+
+Avaliação de profissionais
+
+Integração com e-mail
+
+Painel administrativo
+
+10. Design e Estética
+Cores predominantes: Roxo, branco e preto
+
+Tipografia: Moderna e legível (ex: Poppins, Montserrat)
+
+Layout: Limpo, profissional, foco em usabilidade
+
+Responsivo: Adaptado para mobile, tablet e desktop
+
+11. Sitemap (Mapa de Navegação)
+pgsql
+Copiar
+Editar
+/
+├── index.html (Home)
+├── contratar.html (Contrate Agora)
+├── cadastro.html (Cadastro de Freelancer/Usuário)
+├── login.html (Login)
+├── contato.html (Formulário de contato)
+└── sobre.html (Sobre a plataforma)
+12. Banco de Dados (Opcional)
+Tabelas sugeridas:
+usuarios (id, nome, email, senha, tipo)
+
+freelancers (id, usuario_id, categoria, especialidade, região, descrição)
+
+anuncios (id, usuario_id, descrição, tipo_serviço, região)
+
+13. Considerações Finais
+O site Serv+ é uma solução prática e moderna para quem busca freelancers ou deseja oferecer serviços. Seu foco é a simplicidade de uso, clareza das informações e acessibilidade, promovendo um ambiente confiável de conexões profissionais.

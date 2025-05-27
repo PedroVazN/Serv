@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SERV+ | Contrate Agora</title>
+  <link rel="stylesheet" href="Style/contratar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-flex">
+      <div class="logo">SERV<span class="plus">+</span></div>
+      <nav class="nav">
+        <a href="contato.html">CONTATO</a>
+        <a href="servicos.html">SERVIÇOS</a>
+        <a href="profissionais.html">PROFISSIONAIS</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-link">ENTRAR</a>
+        <a href="cadastro.html" class="btn-cadastro">CADASTRO</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="hero-bg"></div>
+    
+    <!-- Título -->
+    <section class="title-section">
+      <div class="container">
+        <h1>CONTRATE AGORA</h1>
+      </div>
+    </section>
+
+    <!-- Carrossel de Serviços -->
+    <section class="carousel-section">
+      <div class="container">
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+          
+          <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <img src="Assets/dev_front.png" alt="Desenvolvimento Web" class="carousel-img">
+                <div class="carousel-overlay">
+                  <h3 class="carousel-title">Desenvolvimento Web</h3>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="Assets/design_grafico.png" alt="Design Gráfico" class="carousel-img">
+                <div class="carousel-overlay">
+                  <h3 class="carousel-title">Design Gráfico</h3>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="Assets/marketing_dig.png" alt="Marketing Digital" class="carousel-img">
+                <div class="carousel-overlay">
+                  <h3 class="carousel-title">Marketing Digital</h3>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="Assets/consultoria.png" alt="Consultoria" class="carousel-img">
+                <div class="carousel-overlay">
+                  <h3 class="carousel-title">Consultoria</h3>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="Assets/pintor.png" alt="Pintor" class="carousel-img">
+                <div class="carousel-overlay">
+                  <h3 class="carousel-title">Serviços de Pintura</h3>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <img src="Assets/pedreiro.png" alt="Pedreiro" class="carousel-img">
+                <div class="carousel-overlay">
+                  <h3 class="carousel-title">Serviços de Pedreiro</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards de Serviços -->
+    <section class="services-section">
+      <div class="container">
+        <div class="services-grid">
+          <!-- Card Digital -->
+          <div class="service-card">
+            <div class="card-icon">
+              <img src="Assets/pessoa1.svg" alt="Digital">
+            </div>
+            <h3>Precisa de um Freelancer Digital ?</h3>
+            <ul class="service-list">
+              <li><> Desenvolvedor Front-End</li>
+              <li><> Desenvolvedor Back-End</li>
+              <li><> Desenvolvedor Full-Stack</li>
+              <li><> Mobile Developer</li>
+              <li><> UI/UX Designer</li>
+              <li><> Data Engineer</li>
+              <li><> Data Scientist</li>
+              <li><> DevOps</li>
+            </ul>
+          </div>
+
+          <!-- Card Presencial -->
+          <div class="service-card">
+            <div class="card-icon">
+              <img src="Assets/pessoa2.svg" alt="Presencial">
+            </div>
+            <h3>Precisa de um Freelancer Presencial ?</h3>
+            <ul class="service-list">
+              <li><> Garçom / Garçonete</li>
+              <li><> Manobrista</li>
+              <li><> Pintor(a)</li>
+              <li><> Jardineiro(a)</li>
+              <li><> Faxineiro(a)</li>
+              <li><> Encanador(a)</li>
+              <li><> Eletricista(a)</li>
+              <li><> Ajudante de pedreiro</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>SERV+</h3>
+        <p>A maior plataforma de oferta e demanda</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Link Rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="contratar.html">Contrate Agora</a></li>
+          <li><a href="cadastro.html">Ser Contratado</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p>Tel: (11) 99999-9999</p>
+        <p>servmais@gmail.com</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2025 Serv. Todos direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="Script/contratar.js"></script>
+</body>
+</html> 
