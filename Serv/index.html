@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SERV+ | Encontre o Freelancer Perfeito</title>
   <link rel="stylesheet" href="Style/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="container header-flex">
-      <div class="logo">SERV<span class="plus">+</span></div>
+      <div class="logo">SERV+</div>     
       <nav class="nav">
         <a href="contato.html">CONTATO</a>
         <a href="servicos.html">SERVIÇOS</a>
@@ -24,30 +24,110 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
-      <div class="hero-text-box">
-        <h1>ENCONTRE O FREELANCER<br>PERFEITO PARA VOCÊ</h1>
-        <p>Os melhores profissionais do mercado</p>
-        <button class="btn-primary" onclick="window.location.href='contratar.html'">SAIBA MAIS</button>
+    <div class="hero-background">
+      <!-- Elementos decorativos -->
+      <div class="decorative-elements">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="dots-pattern dots-1"></div>
+        <div class="dots-pattern dots-2"></div>
+        <div class="plus-icon plus-1">+</div>
+        <div class="plus-icon plus-2">+</div>
+        <div class="plus-icon plus-3">+</div>
+        <div class="wave-line"></div>
       </div>
-      <div class="hero-img-box">
-        <img src="Assets/pessoa.svg" alt="Grupo de freelancers" class="hero-img">
+    </div>
+    
+    <div class="container hero-content">
+      <div class="hero-text-section">
+        <div class="hero-badge">
+          <span>✨ Plataforma #1 em Freelancers</span>
+        </div>
+        <h1 class="hero-title">
+          ENCONTRE O 
+          <span class="highlight">FREELANCER</span>
+          PERFEITO PARA VOCÊ
+        </h1>
+        <p class="hero-description">
+          Conectamos você aos melhores profissionais do mercado. 
+          Qualidade garantida, resultados excepcionais.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="window.location.href='contratar.html'">
+            COMEÇAR AGORA
+            <span class="btn-icon">→</span>
+          </button>
+          <button class="btn-secondary" onclick="window.location.href='servicos.html'">
+            VER SERVIÇOS
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Freelancers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">1000+</span>
+            <span class="stat-label">Projetos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">Satisfação</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-visual-section">
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/LMODsQ6bmIE?autoplay=1&mute=1" 
+            title="SERV+ - Plataforma de Freelancers" 
+            frameborder="0" 
+            allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer-chamada">
-    <div class="container footer-flex">
-      <div class="footer-text">
-        <strong>VOCÊ É FREELANCER?</strong><br>
-        Junte-se à nossa equipe
-      </div>
-      <a href="cadastro.html" class="btn-footer">COMECE AGORA</a>
+  <!-- Data e Hora Overlay -->
+  <div class="datetime-overlay">
+    <div class="datetime-content">
+      <div class="time" id="current-time"></div>
+      <div class="date" id="current-date"></div>
     </div>
-  </footer>
+  </div>
+
+  <script>
+    // Função para atualizar data e hora
+    function updateDateTime() {
+      const now = new Date();
+      
+      const timeOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      
+      const dateOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      };
+      
+      document.getElementById('current-time').textContent = now.toLocaleTimeString('pt-BR', timeOptions);
+      document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', dateOptions);
+    }
+    
+    // Atualizar a cada segundo
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
 </body>
 </html> 

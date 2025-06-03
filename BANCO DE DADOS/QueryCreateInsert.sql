@@ -256,4 +256,3 @@ INSERT INTO pagamentos (id_pedido, id_metodo, valor, status) VALUES
 (14, 2, 1200.00, 'concluido'),
 (15, 1, 400.00, 'pendente'),
 (16, 4, 550.00, 'concluido');
-
