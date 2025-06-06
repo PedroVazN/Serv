@@ -1,7 +1,9 @@
-package com.mycompany;
+
+package com.mycompany.interfaceserv;
+
 
 public class Pessoa {
-    String nome, email, senha, sexo, cpf, telefone, endereco, nascimento;
+        String nome, email, senha, sexo, cpf, telefone, endereco, nascimento;
 
     public String getNome() {
         return nome;
@@ -71,7 +73,8 @@ public class Pessoa {
                 "\nE-mail: " + this.email +
                 "\nCPF: " + this.cpf + 
                 "\nTelefone: " + this.telefone + 
-                "\nEndereco " + this.endereco +
+                "\nEndereco: " + this.endereco +
+                "\nSexo: " + this.sexo +
                 "\nNascimento" + this.nascimento +
                 "\n"
                 ;
