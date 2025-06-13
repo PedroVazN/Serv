@@ -36,15 +36,15 @@ public class login extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
 
         jPanel1.setBackground(new java.awt.Color(66, 47, 113));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/interfaceserv/img/func.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\natha\\OneDrive\\Documentos\\GitHub\\Serv\\LINGUAGEM DE PROGRAMACAO\\interfaceServ\\src\\main\\java\\com\\mycompany\\interfaceserv\\img\\func.png")); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(124, 71, 252));
 
@@ -88,6 +88,16 @@ public class login extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Entrar");
 
+        jButton2.setBackground(new java.awt.Color(102, 102, 255));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("ou Cadastre-se");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,8 +121,12 @@ public class login extends javax.swing.JFrame {
                         .addGap(60, 60, 60)
                         .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(125, 125, 125)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButton2)))))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -130,9 +144,11 @@ public class login extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jCheckBox1)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -193,6 +209,12 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new cadastro().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +252,7 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

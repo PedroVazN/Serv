@@ -31,12 +31,15 @@ public class cadastroServico extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
+        idUsuario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         salvar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        telefone = new javax.swing.JTextField();
-        sexo = new javax.swing.JComboBox<>();
+        dataCriacao = new javax.swing.JTextField();
+        titulo = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descricao = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         area = new javax.swing.JTextArea();
 
@@ -57,15 +60,15 @@ public class cadastroServico extends javax.swing.JFrame {
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel2.setText("Adicionar Pedido");
+        jLabel2.setText("Adicionar Serviço");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Id do Cliente:");
+        jLabel4.setText("Id do Usuário:");
 
-        nome.setText("Nome");
+        idUsuario.setText("Nome");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Data do Pedido:");
+        jLabel5.setText("Data do Anúncio:");
 
         salvar.setBackground(new java.awt.Color(157, 97, 254));
         salvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -78,20 +81,22 @@ public class cadastroServico extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setText("Status:");
+        jLabel10.setText("Título:");
 
-        telefone.addActionListener(new java.awt.event.ActionListener() {
+        dataCriacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoneActionPerformed(evt);
+                dataCriacaoActionPerformed(evt);
             }
         });
 
-        sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Concluído", "Pendente", "Em andamento" }));
-        sexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sexoActionPerformed(evt);
-            }
-        });
+        titulo.setText("Título");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setText("Descrição:");
+
+        descricao.setColumns(20);
+        descricao.setRows(5);
+        jScrollPane1.setViewportView(descricao);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -103,48 +108,61 @@ public class cadastroServico extends javax.swing.JFrame {
                         .addGap(220, 220, 220)
                         .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
+                        .addGap(112, 112, 112)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(salvar)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addGap(18, 18, 18)
-                                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                                    .addComponent(dataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(salvar)
-                .addGap(28, 28, 28))
+                    .addComponent(idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(dataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(salvar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
         );
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(40, 70, 690, 260);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\25171227\\Downloads\\imgFundoCadastro.png")); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 0, 740, 400);
 
@@ -174,28 +192,20 @@ public class cadastroServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        Pessoa pessoa = new Pessoa();
+        Servico servico = new Servico();
 
-        pessoa.setNome(nome.getText());
-        pessoa.setEmail(email.getText());
-        pessoa.setSexo((String) sexo.getSelectedItem());
-        pessoa.setSenha(senha.getText());
-        pessoa.setCpf(cpf.getText());
-        pessoa.setNascimento(nascimento.getText());
-        pessoa.setTelefone(telefone.getText());
-        pessoa.setEndereco(endereco.getText());
+        servico.setId_usuario(idUsuario.getText());
+        servico.setTitulo(titulo.getText());
+        servico.setDescricao(descricao.getText());
+        servico.setData_criacao(dataCriacao.getText());
 
-        area.setText(pessoa.status());
+        area.setText(servico.status());
         area.setVisible(true);
     }//GEN-LAST:event_salvarActionPerformed
 
-    private void telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneActionPerformed
+    private void dataCriacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataCriacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneActionPerformed
-
-    private void sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sexoActionPerformed
+    }//GEN-LAST:event_dataCriacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,17 +244,20 @@ public class cadastroServico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea area;
+    private javax.swing.JTextField dataCriacao;
+    private javax.swing.JTextArea descricao;
+    private javax.swing.JTextField idUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField nome;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton salvar;
-    private javax.swing.JComboBox<String> sexo;
-    private javax.swing.JTextField telefone;
+    private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 }

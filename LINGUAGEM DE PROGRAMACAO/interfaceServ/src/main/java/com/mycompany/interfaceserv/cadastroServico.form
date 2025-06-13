@@ -99,29 +99,42 @@
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="salvar" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="nome" min="-2" pref="107" max="-2" attributes="0"/>
+                                          <Component id="idUsuario" min="-2" pref="107" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="telefone" min="-2" pref="107" max="-2" attributes="0"/>
+                                          <Component id="dataCriacao" min="-2" pref="107" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" pref="53" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sexo" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel10" min="-2" pref="53" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="titulo" min="-2" pref="107" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" min="-2" pref="98" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -130,21 +143,31 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sexo" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="idUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="titulo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="telefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dataCriacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="salvar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="salvar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -155,7 +178,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="36" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Adicionar Pedido"/>
+                <Property name="text" type="java.lang.String" value="Adicionar Servi&#xe7;o"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -163,10 +186,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Id do Cliente:"/>
+                <Property name="text" type="java.lang.String" value="Id do Usu&#xe1;rio:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="nome">
+            <Component class="javax.swing.JTextField" name="idUsuario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome"/>
               </Properties>
@@ -176,7 +199,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Data do Pedido:"/>
+                <Property name="text" type="java.lang.String" value="Data do An&#xfa;ncio:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="salvar">
@@ -201,39 +224,45 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Status:"/>
+                <Property name="text" type="java.lang.String" value="T&#xed;tulo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="telefone">
+            <Component class="javax.swing.JTextField" name="dataCriacao">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefoneActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataCriacaoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="sexo">
+            <Component class="javax.swing.JTextField" name="titulo">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Conclu&#xed;do"/>
-                    <StringItem index="1" value="Pendente"/>
-                    <StringItem index="2" value="Em andamento"/>
-                  </StringArray>
-                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xed;tulo"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sexoActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel11">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="descricao">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\25171227\Downloads\imgFundoCadastro.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="740" height="400"/>
