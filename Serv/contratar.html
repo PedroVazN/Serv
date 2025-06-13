@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SERV+ | Contrate Agora</title>
+  <title>SERV+ | Monte sua Skill Pod</title>
   <link rel="stylesheet" href="Style/contratar.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -11,11 +11,11 @@
   <!-- Header -->
   <header class="header">
     <div class="container header-flex">
-      <div class="logo"><img src="Assets/logobranca.png" alt="Logo Serv+"></div>     
+      <div class="logo"><a href="index.html"><img src="Assets/logobranca.png" alt="Logo Serv+"></a></div>     
       <nav class="nav">
         <a href="contato.html">CONTATO</a>
         <a href="servicos.html">SERVIÇOS</a>
-        <a href="profissionais.html">PROFISSIONAIS</a>
+        <a href="profissionais.html">SKILL PODS</a>
       </nav>
       <div class="header-actions">
         <a href="login.html" class="btn-link">ENTRAR</a>
@@ -31,7 +31,7 @@
     <!-- Título -->
     <section class="title-section">
       <div class="container">
-        <h1>CONTRATE AGORA</h1>
+        <h1>MONTE SUA SKILL POD</h1>
       </div>
     </section>
 
@@ -43,40 +43,40 @@
           
           <div class="carousel-wrapper">
             <div class="carousel-track" id="carouselTrack">
-              <div class="carousel-slide">
+              <div class="carousel-slide" onclick="showPopup(0)">
                 <img src="Assets/dev_front.png" alt="Desenvolvimento Web" class="carousel-img">
                 <div class="carousel-overlay">
-                  <h3 class="carousel-title">Desenvolvimento Web</h3>
+                  <h3 class="carousel-title">Skill Pod Web</h3>
                 </div>
               </div>
-              <div class="carousel-slide">
+              <div class="carousel-slide" onclick="showPopup(1)">
                 <img src="Assets/design_grafico.png" alt="Design Gráfico" class="carousel-img">
                 <div class="carousel-overlay">
-                  <h3 class="carousel-title">Design Gráfico</h3>
+                  <h3 class="carousel-title">Skill Pod Design</h3>
                 </div>
               </div>
-              <div class="carousel-slide">
+              <div class="carousel-slide" onclick="showPopup(2)">
                 <img src="Assets/marketing_dig.png" alt="Marketing Digital" class="carousel-img">
                 <div class="carousel-overlay">
-                  <h3 class="carousel-title">Marketing Digital</h3>
+                  <h3 class="carousel-title">Skill Pod Marketing</h3>
                 </div>
               </div>
-              <div class="carousel-slide">
+              <div class="carousel-slide" onclick="showPopup(3)">
                 <img src="Assets/consultoria.png" alt="Consultoria" class="carousel-img">
                 <div class="carousel-overlay">
-                  <h3 class="carousel-title">Consultoria</h3>
+                  <h3 class="carousel-title">Skill Pod Consultoria</h3>
                 </div>
               </div>
-              <div class="carousel-slide">
+              <div class="carousel-slide" onclick="showPopup(4)">
                 <img src="Assets/pintor.png" alt="Pintor" class="carousel-img">
                 <div class="carousel-overlay">
-                  <h3 class="carousel-title">Serviços de Pintura</h3>
+                  <h3 class="carousel-title">Skill Pod Construção</h3>
                 </div>
               </div>
-              <div class="carousel-slide">
+              <div class="carousel-slide" onclick="showPopup(5)">
                 <img src="Assets/pedreiro.png" alt="Pedreiro" class="carousel-img">
                 <div class="carousel-overlay">
-                  <h3 class="carousel-title">Serviços de Pedreiro</h3>
+                  <h3 class="carousel-title">Skill Pod Reformas</h3>
                 </div>
               </div>
             </div>
@@ -87,6 +87,37 @@
       </div>
     </section>
 
+    <!-- Pop-up do Carrossel -->
+    <div id="carouselPopup" class="popup">
+      <div class="popup-content">
+        <span class="close-popup" onclick="closePopup()">&times;</span>
+        <div class="popup-header">
+          <img id="popupImage" src="" alt="Skill Pod">
+          <h2 id="popupTitle"></h2>
+        </div>
+        <div class="popup-body">
+          <div class="popup-info">
+            <h3>Descrição</h3>
+            <p id="popupDescription"></p>
+          </div>
+          <div class="popup-info">
+            <h3>Profissionais Incluídos</h3>
+            <ul id="popupProfessionals"></ul>
+          </div>
+          <div class="popup-info">
+            <h3>Benefícios</h3>
+            <ul id="popupBenefits"></ul>
+          </div>
+        </div>
+        <div class="popup-footer">
+          <button class="btn-explore" onclick="window.location.href='skillpods.html'">
+            CONTRATAR SKILL POD
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Cards de Serviços -->
     <section class="services-section">
       <div class="container">
@@ -96,16 +127,16 @@
             <div class="card-icon">
               <img src="./Assets/pessoa1.svg" alt="Digital">
             </div>
-            <h3>Precisa de um Freelancer Digital ?</h3>
+            <h3>Skill Pods Digitais</h3>
             <ul class="service-list">
-              <li><> Desenvolvedor Front-End</li>
-              <li><> Desenvolvedor Back-End</li>
-              <li><> Desenvolvedor Full-Stack</li>
-              <li><> Mobile Developer</li>
-              <li><> UI/UX Designer</li>
-              <li><> Data Engineer</li>
-              <li><> Data Scientist</li>
-              <li><> DevOps</li>
+              <li><> Front-end + Back-end + DevOps</li>
+              <li><> UI/UX + Front-end + Back-end</li>
+              <li><> Full-Stack + DevOps + QA</li>
+              <li><> Mobile + Back-end + DevOps</li>
+              <li><> UI/UX + Front-end + Copywriting</li>
+              <li><> Data Engineer + Data Scientist + DevOps</li>
+              <li><> Front-end + Back-end + Mobile</li>
+              <li><> DevOps + Security + Back-end</li>
             </ul>
           </div>
 
@@ -114,18 +145,117 @@
             <div class="card-icon">
               <img src="./Assets/pessoa2.svg" alt="Presencial">
             </div>
-            <h3>Precisa de um Freelancer Presencial ?</h3>
+            <h3>Skill Pods Presenciais</h3>
             <ul class="service-list">
-              <li><> Garçom / Garçonete</li>
-              <li><> Manobrista</li>
-              <li><> Pintor(a)</li>
-              <li><> Jardineiro(a)</li>
-              <li><> Faxineiro(a)</li>
-              <li><> Encanador(a)</li>
-              <li><> Eletricista(a)</li>
-              <li><> Ajudante de pedreiro</li>
+              <li><> Pintor + Ajudante + Limpeza</li>
+              <li><> Pedreiro + Ajudante + Eletricista</li>
+              <li><> Encanador + Eletricista + Pedreiro</li>
+              <li><> Jardineiro + Ajudante + Limpeza</li>
+              <li><> Faxineiro + Ajudante + Organizador</li>
+              <li><> Garçom + Cozinheiro + Auxiliar</li>
+              <li><> Manobrista + Porteiro + Segurança</li>
+              <li><> Pedreiro + Encanador + Eletricista</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Freelancers e Equipes -->
+    <section class="professionals-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>ESCOLHA COMO TRABALHAR</h2>
+          <p>Contrate profissionais isolados ou monte sua equipe ideal</p>
+        </div>
+
+        <div class="professionals-grid">
+          <!-- Card Freelancers -->
+          <div class="professional-card freelancer">
+            <div class="card-header">
+              <img src="./Assets/freelancer-icon.svg" alt="Freelancer" class="card-icon">
+              <h3>Freelancers</h3>
+            </div>
+            <div class="card-content">
+              <p class="card-description">
+                Contrate profissionais individuais para projetos específicos ou tarefas pontuais.
+              </p>
+              <ul class="features-list">
+                <li>✓ Profissionais especializados</li>
+                <li>✓ Contratação flexível</li>
+                <li>✓ Preços por hora/projeto</li>
+                <li>✓ Ideal para tarefas específicas</li>
+              </ul>
+              <button class="btn-explore" onclick="window.location.href='freelancers.html'">
+                EXPLORAR FREELANCERS
+                <span class="btn-icon">→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Skill Pods -->
+          <div class="professional-card skillpod">
+            <div class="card-header">
+              <img src="./Assets/team-icon.svg" alt="Skill Pod" class="card-icon">
+              <h3>Skill Pods</h3>
+            </div>
+            <div class="card-content">
+              <p class="card-description">
+                Equipes modulares de 2-4 profissionais complementares, prontas para entregar projetos completos.
+              </p>
+              <ul class="features-list">
+                <li>✓ Equipes pré-selecionadas</li>
+                <li>✓ Habilidades complementares</li>
+                <li>✓ Gestão simplificada</li>
+                <li>✓ Ideal para projetos completos</li>
+              </ul>
+              <button class="btn-explore" onclick="window.location.href='skillpods.html'">
+                EXPLORAR SKILL PODS
+                <span class="btn-icon">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparativo -->
+        <div class="comparison-table">
+          <h3>COMPARATIVO</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th>Freelancers</th>
+                <th>Skill Pods</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Número de Profissionais</td>
+                <td>1</td>
+                <td>2-4</td>
+              </tr>
+              <tr>
+                <td>Gestão</td>
+                <td>Você gerencia</td>
+                <td>Equipe auto-gerida</td>
+              </tr>
+              <tr>
+                <td>Escopo</td>
+                <td>Tarefas específicas</td>
+                <td>Projetos completos</td>
+              </tr>
+              <tr>
+                <td>Prazo de Entrega</td>
+                <td>Variável</td>
+                <td>Definido</td>
+              </tr>
+              <tr>
+                <td>Investimento</td>
+                <td>Por hora/projeto</td>
+                <td>Por projeto</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -136,14 +266,14 @@
     <div class="container footer-content">
       <div class="footer-section">
         <h3>SERV+</h3>
-        <p>A maior plataforma de oferta e demanda</p>
+        <p>Skill Pods - Equipes Modulares</p>
       </div>
       
       <div class="footer-section">
         <h3>Link Rápidos</h3>
         <ul class="footer-links">
           <li><a href="index.html">Início</a></li>
-          <li><a href="contratar.html">Contrate Agora</a></li>
+          <li><a href="contratar.html">Montar Skill Pod</a></li>
           <li><a href="cadastro.html">Ser Contratado</a></li>
         </ul>
       </div>
