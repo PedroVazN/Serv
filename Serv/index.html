@@ -11,11 +11,21 @@
   <!-- Header -->
   <header class="header">
     <div class="container header-flex">
-      <div class="logo">SERV+</div>     
+      <div class="logo">SERV+</div>
+      <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+      <label for="menu-toggle" class="menu-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>     
       <nav class="nav">
         <a href="contato.html">CONTATO</a>
         <a href="servicos.html">SERVIÇOS</a>
         <a href="profissionais.html">SKILL PODS</a>
+        <div class="header-actions mobile">
+          <a href="login.html" class="btn-link">ENTRAR</a>
+          <a href="cadastro.html" class="btn-cadastro">CADASTRE-SE</a>
+        </div>
       </nav>
       <div class="header-actions">
         <a href="login.html" class="btn-link">ENTRAR</a>
@@ -23,6 +33,7 @@
       </div>
     </div>
   </header>
+  <label for="menu-toggle" class="menu-overlay"></label>
 
   <!-- Hero Section -->
   <section class="hero">

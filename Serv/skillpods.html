@@ -12,11 +12,21 @@
   <header class="header">
     <div class="container header-flex">
       <div class="logo"><img src="Assets/logobranca.png" alt="Logo Serv+" /></div>
+      <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+      <label for="menu-toggle" class="menu-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
       <nav class="nav">
         <a href="index.html">INÍCIO</a>
         <a href="servicos.html">SERVIÇOS</a>
         <a href="contratar.html">MONTAR EQUIPE</a>
         <a href="skillpods.html" class="active">SKILL PODS</a>
+        <div class="header-actions mobile">
+          <a href="login.html" class="btn-link">ENTRAR</a>
+          <a href="cadastro.html" class="btn-cadastro">CADASTRO</a>
+        </div>
       </nav>
       <div class="header-actions">
         <a href="login.html" class="btn-link">ENTRAR</a>
@@ -24,6 +34,7 @@
       </div>
     </div>
   </header>
+  <label for="menu-toggle" class="menu-overlay"></label>
 
   <!-- Main Content -->
   <main class="main-content">
