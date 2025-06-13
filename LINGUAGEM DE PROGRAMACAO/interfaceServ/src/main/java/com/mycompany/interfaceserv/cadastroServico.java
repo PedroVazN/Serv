@@ -66,7 +66,7 @@ public class cadastroServico extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Id do Usuário:");
 
-        idUsuario.setText("Nome");
+        idUsuario.setText("ID");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Data do Anúncio:");

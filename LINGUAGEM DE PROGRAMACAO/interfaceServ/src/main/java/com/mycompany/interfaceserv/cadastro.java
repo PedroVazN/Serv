@@ -237,7 +237,7 @@ public class cadastro extends javax.swing.JFrame  {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(40, 70, 690, 260);
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 740, 410);
+        jLabel3.setBounds(10, 10, 740, 410);
 
         area.setColumns(20);
         area.setRows(5);
