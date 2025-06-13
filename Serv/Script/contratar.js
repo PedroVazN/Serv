@@ -1,36 +1,124 @@
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 const totalSlides = slides.length;
-let autoPlayInterval;
 
+// Dados dos Skill Pods
+const skillPodsData = [
+  {
+    title: "Skill Pod Web",
+    image: "Assets/dev_front.png",
+    description: "Equipe especializada em desenvolvimento web completo, desde o front-end até o back-end, garantindo soluções digitais modernas e eficientes.",
+    professionals: [
+      "Desenvolvedor Front-end Senior",
+      "Desenvolvedor Back-end Senior",
+      "DevOps Engineer",
+      "UI/UX Designer"
+    ],
+    benefits: [
+      "Desenvolvimento ágil e eficiente",
+      "Código limpo e bem documentado",
+      "Suporte contínuo",
+      "Garantia de qualidade"
+    ]
+  },
+  {
+    title: "Skill Pod Design",
+    image: "Assets/design_grafico.png",
+    description: "Time criativo focado em design gráfico e identidade visual, transformando ideias em designs impactantes e memoráveis.",
+    professionals: [
+      "Designer Gráfico Senior",
+      "UI/UX Designer",
+      "Ilustrador Digital",
+      "Motion Designer"
+    ],
+    benefits: [
+      "Designs únicos e personalizados",
+      "Identidade visual consistente",
+      "Artes para todas as plataformas",
+      "Revisões ilimitadas"
+    ]
+  },
+  {
+    title: "Skill Pod Marketing",
+    image: "Assets/marketing_dig.png",
+    description: "Equipe de marketing digital completa, especializada em estratégias de crescimento e engajamento nas redes sociais.",
+    professionals: [
+      "Social Media Manager",
+      "Content Creator",
+      "Analista de Marketing Digital",
+      "Copywriter"
+    ],
+    benefits: [
+      "Estratégias personalizadas",
+      "Análise de métricas",
+      "Conteúdo otimizado",
+      "Gestão de comunidade"
+    ]
+  },
+  {
+    title: "Skill Pod Consultoria",
+    image: "Assets/consultoria.png",
+    description: "Time de consultores especializados em diferentes áreas, oferecendo soluções estratégicas para seu negócio.",
+    professionals: [
+      "Consultor de Negócios",
+      "Analista Financeiro",
+      "Especialista em Processos",
+      "Consultor de RH"
+    ],
+    benefits: [
+      "Análise completa do negócio",
+      "Plano de ação detalhado",
+      "Acompanhamento contínuo",
+      "Resultados mensuráveis"
+    ]
+  },
+  {
+    title: "Skill Pod Construção",
+    image: "Assets/pintor.png",
+    description: "Equipe completa para projetos de construção, desde a pintura até acabamentos finais, com qualidade e pontualidade.",
+    professionals: [
+      "Mestre de Obras",
+      "Pintor Profissional",
+      "Ajudante de Construção",
+      "Especialista em Acabamentos"
+    ],
+    benefits: [
+      "Materiais de qualidade",
+      "Trabalho garantido",
+      "Limpeza após serviço",
+      "Orçamento transparente"
+    ]
+  },
+  {
+    title: "Skill Pod Reformas",
+    image: "Assets/pedreiro.png",
+    description: "Time especializado em reformas e manutenção, oferecendo soluções completas para sua residência ou empresa.",
+    professionals: [
+      "Pedreiro Especialista",
+      "Eletricista",
+      "Encanador",
+      "Ajudante de Obras"
+    ],
+    benefits: [
+      "Orçamento detalhado",
+      "Prazo cumprido",
+      "Garantia do serviço",
+      "Suporte pós-obra"
+    ]
+  }
+];
+
+// Funções principais do carrossel
 function updateCarousel() {
     slides.forEach((slide, index) => {
-        // Remove todas as classes
-        slide.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next', 'hidden');
+        slide.classList.remove('active', 'prev', 'next');
         
-        // Calcula a posição relativa ao slide atual
-        let position = index - currentSlide;
-        
-        // Normaliza a posição para o loop infinito
-        if (position > totalSlides / 2) {
-            position -= totalSlides;
-        } else if (position < -totalSlides / 2) {
-            position += totalSlides;
-        }
-        
-        // Aplica as classes baseadas na posição
-        if (position === 0) {
+        if (index === currentSlide) {
             slide.classList.add('active');
-        } else if (position === -1) {
+        } else if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
             slide.classList.add('prev');
-        } else if (position === 1) {
+        } else if (index === (currentSlide + 1) % totalSlides) {
             slide.classList.add('next');
-        } else if (position === -2) {
-            slide.classList.add('far-prev');
-        } else if (position === 2) {
-            slide.classList.add('far-next');
-        } else {
-            slide.classList.add('hidden');
         }
     });
     
@@ -38,15 +126,7 @@ function updateCarousel() {
 }
 
 function moveCarousel(direction) {
-    currentSlide += direction;
-    
-    // Loop infinito
-    if (currentSlide >= totalSlides) {
-        currentSlide = 0;
-    } else if (currentSlide < 0) {
-        currentSlide = totalSlides - 1;
-    }
-    
+    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
     updateCarousel();
 }
 
@@ -55,6 +135,7 @@ function goToSlide(slideIndex) {
     updateCarousel();
 }
 
+// Indicadores
 function createIndicators() {
     const carouselSection = document.querySelector('.carousel-section .container');
     const indicatorsContainer = document.createElement('div');
@@ -77,80 +158,63 @@ function updateIndicators() {
     });
 }
 
-// Auto-play do carrossel
-function autoPlay() {
-    moveCarousel(1);
-}
-
-function startAutoPlay() {
-    autoPlayInterval = setInterval(autoPlay, 4000);
-}
-
-function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-}
+// Auto-play simplificado
+let autoPlayInterval = setInterval(() => moveCarousel(1), 4000);
 
 // Event listeners
 const carouselContainer = document.querySelector('.carousel-container');
 
-carouselContainer.addEventListener('mouseenter', stopAutoPlay);
-carouselContainer.addEventListener('mouseleave', startAutoPlay);
+carouselContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+carouselContainer.addEventListener('mouseleave', () => {
+    autoPlayInterval = setInterval(() => moveCarousel(1), 4000);
+});
 
 // Navegação por teclado
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowLeft') {
-        moveCarousel(-1);
-        stopAutoPlay();
-        setTimeout(startAutoPlay, 2000);
-    } else if (event.key === 'ArrowRight') {
-        moveCarousel(1);
-        stopAutoPlay();
-        setTimeout(startAutoPlay, 2000);
-    }
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') moveCarousel(-1);
+    if (event.key === 'ArrowRight') moveCarousel(1);
+    if (event.key === 'Escape') closePopup();
 });
 
-// Clique nos slides para navegar
-slides.forEach((slide, index) => {
-    slide.addEventListener('click', () => {
-        if (!slide.classList.contains('active')) {
-            goToSlide(index);
-            stopAutoPlay();
-            setTimeout(startAutoPlay, 2000);
-        }
-    });
-});
-
-// Suporte para touch/swipe em dispositivos móveis
+// Suporte para touch/swipe
 let startX = 0;
-let endX = 0;
-
-carouselContainer.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-});
-
+carouselContainer.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
 carouselContainer.addEventListener('touchend', (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) moveCarousel(diff > 0 ? 1 : -1);
 });
 
-function handleSwipe() {
-    const threshold = 50;
-    const diff = startX - endX;
+// Funções do popup
+function showPopup(index) {
+    const data = skillPodsData[index];
+    const popup = document.getElementById('carouselPopup');
     
-    if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-            moveCarousel(1); // Swipe left - próximo
-        } else {
-            moveCarousel(-1); // Swipe right - anterior
-        }
-        stopAutoPlay();
-        setTimeout(startAutoPlay, 2000);
-    }
+    document.getElementById('popupImage').src = data.image;
+    document.getElementById('popupTitle').textContent = data.title;
+    document.getElementById('popupDescription').textContent = data.description;
+    
+    document.getElementById('popupProfessionals').innerHTML = 
+        data.professionals.map(p => `<li>${p}</li>`).join('');
+    
+    document.getElementById('popupBenefits').innerHTML = 
+        data.benefits.map(b => `<li>${b}</li>`).join('');
+    
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
+
+function closePopup() {
+    document.getElementById('carouselPopup').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Fechar popup ao clicar fora
+document.getElementById('carouselPopup').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closePopup();
+});
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
     createIndicators();
     updateCarousel();
-    startAutoPlay();
 }); 
