@@ -8,6 +8,7 @@ com\mycompany\interfaceserv\menu.class
 com\mycompany\interfaceserv\cadastroServico$1.class
 com\mycompany\interfaceserv\cadastro$1.class
 com\mycompany\interfaceserv\cadastroPedido$2.class
+com\mycompany\interfaceserv\cadastro$8.class
 com\mycompany\interfaceserv\login$6.class
 com\mycompany\interfaceserv\inicio.class
 com\mycompany\interfaceserv\menu$4.class
@@ -29,7 +30,6 @@ com\mycompany\interfaceserv\cadastro$7.class
 com\mycompany\interfaceserv\login$5.class
 com\mycompany\interfaceserv\cadastroPedido$3.class
 com\mycompany\interfaceserv\cadastroServico$4.class
-com\mycompany\Pessoa.class
 com\mycompany\interfaceserv\cadastroPedido$1.class
 com\mycompany\interfaceserv\cadastro$2.class
 com\mycompany\interfaceserv\inicio$1.class
