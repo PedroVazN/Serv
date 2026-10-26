@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+
+  # ── API Node.js ─────────────────────────────
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: serv_api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=production
+    networks:
+      - serv_network
+
+  # ── React / Vite (dev) ───────────────────────
+  frontend:
+    image: node:20-alpine
+    container_name: serv_frontend
+    working_dir: /app
+    volumes:
+      - ./Serv/frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    networks:
+      - serv_network
+    depends_on:
+      - api
+
+networks:
+  serv_network:
+    driver: bridge

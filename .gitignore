@@ -1,0 +1,18 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente e credenciais
+.env
+*.env
+atlas-credentials.env
+
+# Logs
+npm-debug.log*
+*.log
+
+# Build Java
+target/
+
+# OS
+.DS_Store
+Thumbs.db
