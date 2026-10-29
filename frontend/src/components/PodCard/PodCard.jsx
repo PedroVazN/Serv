@@ -1,67 +1,45 @@
-import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function PodCard({ pod }) {
   const navigate = useNavigate()
-  const cardRef  = useRef(null)
-
-  function onMouseMove(e) {
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width  - 0.5
-    const y = (e.clientY - rect.top)  / rect.height - 0.5
-    cardRef.current.style.transform =
-      `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateZ(16px)`
-  }
-
-  function onMouseLeave() {
-    cardRef.current.style.transform = ''
-  }
+  const category = pod.category === 'presencial' ? 'Presencial' : 'Digital'
 
   return (
-    <div
-      ref={cardRef}
-      className={`group relative h-full overflow-hidden rounded-[28px] border transition-[border-color,box-shadow,background-color] duration-300 will-change-transform [transform-style:preserve-3d] hover:border-serv-500/35 hover:shadow-[0_24px_64px_rgba(107,70,193,.18)] ${pod.featured ? 'border-serv-500/30 bg-gradient-to-br from-purple-50 to-serv-100 shadow-[0_12px_40px_rgba(107,70,193,.15)]' : 'border-serv-500/15 bg-white'}`}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-    >
-      {pod.featured && <span className="absolute right-4 top-4 z-10 rounded-full bg-gradient-to-br from-serv-600 to-serv-400 px-3.5 py-1.5 text-[.7rem] font-extrabold uppercase tracking-wide text-white">Mais popular</span>}
-
-      <div className="pointer-events-none absolute -right-[50px] -top-[50px] z-0 size-[200px] rounded-full opacity-[.12] blur-[70px] transition-opacity group-hover:opacity-[.22]" style={{ background: pod.glowColor }} />
-
-      {pod.image && <img src={pod.image} alt="" aria-hidden="true" className="relative z-[1] h-40 w-full object-cover sm:h-44" />}
-
-      <div className="relative z-[1] flex flex-1 flex-col p-5 sm:p-8">
-        <div className="mb-4 flex items-start justify-between">
-          <span className="text-4xl leading-none">{pod.emoji}</span>
-          <div className="flex flex-col items-end gap-1">
-            <span className={`rounded-full border px-2.5 py-1 text-[.67rem] font-bold uppercase tracking-wider ${pod.category === 'presencial' ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-serv-500/20 bg-serv-500/10 text-serv-600'}`}>
-              {pod.category === 'presencial' ? 'Presencial' : 'Digital'}
-            </span>
-            <span className="text-[.68rem] font-semibold text-gray-400">{pod.size}</span>
+    <article className={`group flex h-full flex-col overflow-hidden border bg-white transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 ${pod.featured ? 'border-serv-500/35 shadow-[0_18px_50px_rgba(42,27,61,.1)] hover:shadow-[0_24px_60px_rgba(42,27,61,.16)]' : 'border-serv-950/10 hover:border-serv-500/30 hover:shadow-[0_18px_50px_rgba(42,27,61,.1)]'}`}>
+      <div className="relative aspect-[16/9] overflow-hidden bg-serv-900">
+        {pod.image ? (
+          <img src={pod.image} alt="" aria-hidden="true" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
+        ) : (
+          <div className="grid size-full place-items-center bg-[radial-gradient(circle_at_70%_25%,rgba(196,181,253,.28),transparent_30%),linear-gradient(135deg,#3d2560,#1a0f2e)]">
+            <span className="font-display text-7xl text-white/90" aria-hidden="true">{pod.emoji}</span>
           </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-serv-950/65 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-5">
+          <span className="text-xs font-semibold text-white/80">{pod.size}</span>
+          <span className={`border px-2.5 py-1 text-[.68rem] font-bold ${pod.category === 'presencial' ? 'border-emerald-200/50 bg-emerald-950/45 text-emerald-100' : 'border-white/35 bg-serv-950/45 text-white'}`}>{category}</span>
         </div>
+        {pod.featured && <span className="absolute left-4 top-4 bg-serv-200 px-3 py-1 text-[.68rem] font-bold text-serv-950">Em destaque</span>}
+      </div>
 
-        <h3 className="mb-2 text-xl font-black tracking-tight text-serv-900">{pod.name}</h3>
-        <p className="mb-5 text-sm leading-relaxed text-gray-500">{pod.desc}</p>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <h3 className="text-xl font-bold tracking-tight text-serv-950 sm:text-2xl">{pod.name}</h3>
+        <p className="mt-2 min-h-[3.25rem] text-sm leading-6 text-serv-900/65">{pod.desc}</p>
 
-        <ul className="mb-6 flex flex-col gap-2">
-          {pod.members.map(m => (
-            <li key={m.label} className="flex items-center gap-2.5 rounded-xl border border-purple-200 bg-purple-50 px-3.5 py-2 text-sm text-gray-700 transition group-hover:border-serv-500/25 group-hover:bg-purple-100">
-              <span>{m.icon}</span>
-              <span>{m.label}</span>
-            </li>
-          ))}
+        <ul className="mt-5 flex flex-wrap gap-2" aria-label="Especialidades">
+          {pod.tags.slice(0, 3).map(tag => <li key={tag} className="border border-serv-950/10 px-2.5 py-1 text-xs font-medium text-serv-900/70">{tag}</li>)}
         </ul>
 
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-purple-100 pt-4">
-          <div className="flex flex-wrap gap-1.5">
-            {pod.tags.map(t => <span key={t} className="rounded-full border border-gray-200 bg-[#f4f2f8] px-2.5 py-1 text-[.7rem] font-semibold text-gray-500">{t}</span>)}
+        <div className="mt-auto border-t border-serv-950/10 pt-5">
+          <div className="mb-5 flex flex-wrap gap-x-3 gap-y-1.5 text-xs leading-5 text-serv-900/65">
+            {pod.members.slice(0, 3).map(member => <span key={member.label}>{member.label}</span>)}
+            {pod.members.length > 3 && <span>+{pod.members.length - 3}</span>}
           </div>
-          <button className="whitespace-nowrap rounded-full bg-gradient-to-br from-serv-500 to-serv-700 px-5 py-2 text-xs font-bold text-white shadow-[0_4px_16px_rgba(107,70,193,.3)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(107,70,193,.45)]" onClick={() => navigate('/contratar')}>
-            Contratar →
+          <button type="button" className="group/action inline-flex w-full items-center justify-between border border-serv-950/15 px-4 py-3 text-sm font-bold text-serv-950 transition-colors hover:border-serv-950 hover:bg-serv-950 hover:text-white focus-visible:ring-offset-white" onClick={() => navigate('/contratar')}>
+            Conhecer equipe <span aria-hidden="true" className="transition-transform group-hover/action:translate-x-1">↗</span>
           </button>
         </div>
       </div>
-    </div>
+    </article>
   )
 }

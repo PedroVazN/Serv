@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: light;
+  --serv-paper: #f7f5fa;
+  --serv-paper-deep: #eeeaf5;
+  --serv-ink: #241b30;
   --purple-950: #1a0f2e;
   --purple-900: #2a1b3d;
   --purple-800: #3d2560;
@@ -28,13 +32,14 @@
 @layer base {
   *, *::before, *::after { @apply box-border; }
   html { @apply scroll-smooth; }
-  body { @apply m-0 min-h-screen overflow-x-hidden bg-serv-950 font-sans leading-relaxed text-white; }
+  body { @apply m-0 min-h-screen overflow-x-hidden bg-[#f7f5fa] font-sans leading-relaxed text-[#241b30] antialiased; }
+  h1, h2, h3, h4 { @apply font-display; }
   a { @apply text-inherit no-underline; }
   button { @apply cursor-pointer font-sans; }
   img { @apply block max-w-full; }
   ul { @apply list-none; }
-  :focus-visible { @apply outline-none ring-2 ring-serv-200 ring-offset-2 ring-offset-serv-950; }
-  ::selection { @apply bg-serv-400/50 text-white; }
+  :focus-visible { @apply outline-none ring-2 ring-serv-500 ring-offset-2 ring-offset-[#f7f5fa]; }
+  ::selection { @apply bg-serv-200 text-serv-950; }
 }
 
 @layer components {

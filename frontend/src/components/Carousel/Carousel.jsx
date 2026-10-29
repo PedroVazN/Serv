@@ -1,157 +1,131 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function Carousel({ pods }) {
   const [current, setCurrent] = useState(0)
-  const [popup, setPopup]     = useState(null)
+  const [popup, setPopup] = useState(null)
   const total = pods.length
-  const navigate  = useNavigate()
-  const autoRef   = useRef(null)
-
-  const move = useCallback((dir) => {
-    setCurrent(c => (c + dir + total) % total)
-  }, [total])
-
-  const startAuto = useCallback(() => {
-    clearInterval(autoRef.current)
-    autoRef.current = setInterval(() => move(1), 4000)
-  }, [move])
-
-  const stopAuto = useCallback(() => {
-    clearInterval(autoRef.current)
-  }, [])
-
-  useEffect(() => {
-    if (popup) stopAuto()
-    else startAuto()
-    return stopAuto
-  }, [startAuto, stopAuto, popup])
-
-  // Keyboard nav
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.key === 'ArrowLeft')  move(-1)
-      if (e.key === 'ArrowRight') move(1)
-      if (e.key === 'Escape')     setPopup(null)
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [move])
-
-  // Block scroll when popup open
-  useEffect(() => {
-    document.body.style.overflow = popup ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [popup])
-
-  function getSlideClass(index) {
-    const diff = (index - current + total) % total
-    if (diff === 0) return { className: 'z-[4] opacity-100 shadow-[0_24px_64px_rgba(107,70,193,.4)]', transform: 'translateX(0) scale(1.35) rotateY(0)' }
-    if (diff === 1) return { className: 'z-[3] opacity-65', transform: 'translateX(clamp(145px,18vw,220px)) scale(.78) rotateY(-18deg)' }
-    if (diff === total - 1) return { className: 'z-[3] opacity-65', transform: 'translateX(clamp(-220px,-18vw,-145px)) scale(.78) rotateY(18deg)' }
-    if (diff === 2) return { className: 'z-[2] opacity-35 max-md:opacity-0', transform: 'translateX(clamp(235px,32vw,390px)) scale(.58) rotateY(-28deg)' }
-    if (diff === total - 2) return { className: 'z-[2] opacity-35 max-md:opacity-0', transform: 'translateX(clamp(-390px,-32vw,-235px)) scale(.58) rotateY(28deg)' }
-    return { className: 'pointer-events-none z-0 scale-50 opacity-0', transform: 'scale(.2)' }
-  }
-
-  // Touch support
+  const navigate = useNavigate()
   const touchRef = useRef(0)
   const suppressClickRef = useRef(false)
 
+  const move = useCallback((direction) => {
+    setCurrent(index => (index + direction + total) % total)
+  }, [total])
+
+  useEffect(() => {
+    if (!popup) return undefined
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = event => {
+      if (event.key === 'Escape') setPopup(null)
+      if (event.key === 'ArrowRight') move(1)
+      if (event.key === 'ArrowLeft') move(-1)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [popup, move])
+
+  function getSlide(index) {
+    const distance = (index - current + total) % total
+    if (distance === 0) return { className: 'z-[4] opacity-100', transform: 'translateX(0) scale(1.08) rotateY(0)' }
+    if (distance === 1) return { className: 'z-[3] opacity-65', transform: 'translateX(clamp(125px,17vw,205px)) scale(.76) rotateY(-16deg)' }
+    if (distance === total - 1) return { className: 'z-[3] opacity-65', transform: 'translateX(clamp(-205px,-17vw,-125px)) scale(.76) rotateY(16deg)' }
+    if (distance === 2) return { className: 'z-[2] opacity-30 max-md:opacity-0', transform: 'translateX(clamp(215px,30vw,360px)) scale(.56) rotateY(-26deg)' }
+    if (distance === total - 2) return { className: 'z-[2] opacity-30 max-md:opacity-0', transform: 'translateX(clamp(-360px,-30vw,-215px)) scale(.56) rotateY(26deg)' }
+    return { className: 'pointer-events-none z-0 opacity-0', transform: 'scale(.2)' }
+  }
+
   return (
     <>
-      <div
-        className="bg-serv-950 py-12 sm:py-16"
-        onMouseEnter={stopAuto}
-        onMouseLeave={startAuto}
-      >
-        <p className="mb-8 text-center text-xs font-bold uppercase tracking-[.14em] text-white/50">Escolha sua área</p>
-
-        <div className="relative mx-auto flex h-[300px] max-w-site items-center justify-center overflow-hidden px-4 sm:h-[380px] sm:px-10">
-          <button type="button" className="absolute left-2 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-serv-500/80 text-3xl text-white shadow-lg backdrop-blur transition hover:scale-110 hover:bg-serv-500 sm:left-5 sm:size-[52px]" onClick={() => move(-1)} aria-label="Anterior">‹</button>
-
-          <div className="relative h-full w-full [perspective:1200px]">
-            <div className="relative flex h-full items-center justify-center">
-              {pods.map((pod, i) => (
-                <button
-                  key={pod.id}
-                  type="button"
-                  aria-label={`Ver detalhes: ${pod.title}`}
-                  className={`absolute aspect-[28/19] w-[clamp(190px,24vw,280px)] overflow-hidden rounded-[20px] shadow-[0_8px_32px_rgba(0,0,0,.3)] transition-[transform,opacity,box-shadow] duration-[600ms] ease-[cubic-bezier(.25,.46,.45,.94)] [transform-style:preserve-3d] focus-visible:ring-2 focus-visible:ring-serv-200 ${getSlideClass(i).className}`}
-                  style={{ transform: getSlideClass(i).transform }}
-                  onClick={() => {
-                    if (suppressClickRef.current) {
-                      suppressClickRef.current = false
-                      return
-                    }
-                    setPopup(pod)
-                  }}
-                  onTouchStart={e => { stopAuto(); touchRef.current = e.touches[0].clientX }}
-                  onTouchEnd={e => {
-                    const diff = touchRef.current - e.changedTouches[0].clientX
-                    if (Math.abs(diff) > 50) {
-                      suppressClickRef.current = true
-                      setTimeout(() => { suppressClickRef.current = false }, 0)
-                      move(diff > 0 ? 1 : -1)
-                    }
-                    startAuto()
-                  }}
-                >
-                  <img src={pod.image} alt="" aria-hidden="true" className="size-full object-cover transition-transform duration-500 hover:scale-105" />
-                  <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 bg-gradient-to-t from-serv-950/95 via-serv-950/45 to-transparent px-4 pb-4 pt-8 text-left sm:px-5 sm:pb-5">
-                    <span className="w-fit rounded-full bg-serv-500/40 px-2.5 py-1 text-[.68rem] font-bold uppercase tracking-wider text-serv-200">{pod.tag}</span>
-                    <h3 className="m-0 text-base font-extrabold text-white sm:text-lg">{pod.title}</h3>
-                  </div>
-                </button>
-              ))}
+      <section className="overflow-hidden bg-serv-950 py-12 text-white sm:py-16" aria-label="Skill Pods em destaque" aria-roledescription="carousel">
+        <div className="container">
+          <div className="mb-2 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-serv-200">Uma amostra do catálogo</p>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Conheça as equipes</h2>
             </div>
+            <span className="font-display text-sm font-semibold text-white/45">{String(current + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
           </div>
 
-          <button type="button" className="absolute right-2 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-serv-500/80 text-3xl text-white shadow-lg backdrop-blur transition hover:scale-110 hover:bg-serv-500 sm:right-5 sm:size-[52px]" onClick={() => move(1)} aria-label="Próximo">›</button>
-        </div>
+          <div className="relative mx-auto mt-4 flex h-[290px] max-w-5xl items-center justify-center overflow-hidden px-7 sm:h-[350px] sm:px-16">
+            <button type="button" className="absolute left-0 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center border border-white/20 text-xl text-white transition-colors hover:border-serv-200 hover:bg-serv-200 hover:text-serv-950 sm:size-12" onClick={() => move(-1)} aria-label="Equipe anterior">←</button>
+            <div className="relative h-full w-full [perspective:1100px]" aria-live="polite">
+              {pods.map((pod, index) => {
+                const slide = getSlide(index)
+                return (
+                  <button
+                    key={pod.id}
+                    type="button"
+                    aria-label={`Ver detalhes: ${pod.title}`}
+                    aria-current={index === current ? 'true' : undefined}
+                    tabIndex={index === current ? 0 : -1}
+                    className={`absolute left-1/2 top-1/2 aspect-[28/19] w-[clamp(190px,24vw,280px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden border border-white/20 bg-serv-900 shadow-[0_24px_60px_rgba(0,0,0,.36)] transition-[transform,opacity] duration-500 ease-[cubic-bezier(.2,.75,.25,1)] [backface-visibility:hidden] focus-visible:ring-offset-serv-950 ${slide.className}`}
+                    style={{ transform: `translate(-50%,-50%) ${slide.transform}` }}
+                    onClick={() => {
+                      if (suppressClickRef.current) {
+                        suppressClickRef.current = false
+                        return
+                      }
+                      setPopup(pod)
+                    }}
+                    onTouchStart={event => { touchRef.current = event.touches[0].clientX }}
+                    onTouchEnd={event => {
+                      const distance = touchRef.current - event.changedTouches[0].clientX
+                      if (Math.abs(distance) > 50) {
+                        suppressClickRef.current = true
+                        setTimeout(() => { suppressClickRef.current = false }, 0)
+                        move(distance > 0 ? 1 : -1)
+                      }
+                    }}
+                  >
+                    <img src={pod.image} alt="" aria-hidden="true" className="size-full object-cover" />
+                    <span className="absolute inset-x-0 bottom-0 flex flex-col items-start bg-gradient-to-t from-serv-950/95 to-transparent px-4 pb-4 pt-12 text-left sm:px-5 sm:pb-5">
+                      <span className="mb-1 text-xs font-semibold text-serv-200">{pod.tag}</span>
+                      <span className="text-base font-bold text-white sm:text-lg">{pod.title}</span>
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+            <button type="button" className="absolute right-0 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center border border-white/20 text-xl text-white transition-colors hover:border-serv-200 hover:bg-serv-200 hover:text-serv-950 sm:size-12" onClick={() => move(1)} aria-label="Próxima equipe">→</button>
+          </div>
 
-        <div className="mt-7 flex justify-center gap-2">
-          {pods.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-current={i === current ? 'true' : undefined}
-              className={`h-2 rounded-full transition-all ${i === current ? 'w-5 bg-serv-300' : 'w-2 bg-white/25 hover:bg-white/50'}`}
-              onClick={() => setCurrent(i)}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
+          <div className="mt-4 flex items-center justify-center gap-2" role="group" aria-label="Selecionar equipe">
+            {pods.map((pod, index) => <button key={pod.id} type="button" aria-label={`Mostrar ${pod.title}`} aria-current={index === current ? 'true' : undefined} className={`h-1.5 transition-all ${index === current ? 'w-8 bg-serv-200' : 'w-3 bg-white/30 hover:bg-white/60'}`} onClick={() => setCurrent(index)} />)}
+          </div>
+          <p className="mt-3 text-center text-xs text-white/45">Selecione uma equipe para ver as especialidades.</p>
         </div>
-        <p className="mt-4 text-center text-xs text-white/40">Escolha uma Pod para ver os detalhes</p>
-      </div>
+      </section>
 
-      {/* Popup */}
       {popup && (
-        <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md" onClick={() => setPopup(null)}>
-          <div role="dialog" aria-modal="true" aria-labelledby="pod-dialog-title" className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[28px] bg-white p-5 text-serv-950 shadow-2xl sm:p-10" onClick={e => e.stopPropagation()}>
-            <button type="button" className="absolute right-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-serv-500/10 text-serv-700 transition hover:rotate-90 hover:bg-serv-500/20 sm:right-5 sm:top-5" onClick={() => setPopup(null)} aria-label="Fechar">✕</button>
-            <div className="mb-7 flex flex-col gap-5 border-b border-purple-200 pb-7 sm:flex-row sm:items-start sm:gap-6">
-              <img src={popup.image} alt="" aria-hidden="true" className="h-40 w-full shrink-0 rounded-[20px] object-cover sm:h-[100px] sm:w-[140px]" />
+        <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-serv-950/85 p-4 backdrop-blur-sm" onClick={() => setPopup(null)}>
+          <div role="dialog" aria-modal="true" aria-labelledby="pod-dialog-title" className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto border border-serv-950/10 bg-[#f7f5fa] p-5 text-serv-950 shadow-2xl sm:p-9" onClick={event => event.stopPropagation()}>
+            <button type="button" className="absolute right-4 top-4 z-10 grid size-10 place-items-center border border-serv-950/15 bg-white text-serv-950 transition-colors hover:bg-serv-950 hover:text-white sm:right-6 sm:top-6" onClick={() => setPopup(null)} aria-label="Fechar detalhes">×</button>
+            <div className="mb-7 grid gap-5 border-b border-serv-950/10 pb-7 sm:grid-cols-[180px_1fr] sm:items-center">
+              <img src={popup.image} alt="" aria-hidden="true" className="aspect-[16/10] w-full object-cover" />
               <div>
-                <h2 id="pod-dialog-title" className="mb-2 pr-8 text-2xl font-black text-serv-700 sm:text-3xl">{popup.title}</h2>
-                <p className="text-sm leading-relaxed text-purple-800">{popup.description}</p>
+                <p className="text-sm font-semibold text-serv-600">{popup.tag}</p>
+                <h2 id="pod-dialog-title" className="mt-1 pr-10 text-2xl font-bold tracking-tight sm:text-3xl">{popup.title}</h2>
+                <p className="mt-3 text-sm leading-7 text-serv-900/65">{popup.description}</p>
               </div>
             </div>
-            <div className="mb-7 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-[20px] border border-purple-200 bg-purple-50 p-5">
-                <h3 className="mb-3 text-base font-bold text-serv-700">👥 Profissionais incluídos</h3>
-                <ul className="flex flex-col gap-2">{popup.professionals.map(p => <li key={p} className="relative pl-5 text-sm text-purple-900 before:absolute before:left-0 before:font-bold before:text-serv-500 before:content-['✓']">{p}</li>)}</ul>
+            <div className="mb-8 grid gap-7 sm:grid-cols-2">
+              <div>
+                <h3 className="mb-3 text-sm font-bold text-serv-950">Especialistas</h3>
+                <ul className="flex flex-col gap-2">{popup.professionals.map(person => <li key={person} className="border-b border-serv-950/10 py-2 text-sm text-serv-900/70">{person}</li>)}</ul>
               </div>
-              <div className="rounded-[20px] border border-purple-200 bg-purple-50 p-5">
-                <h3 className="mb-3 text-base font-bold text-serv-700">✨ Benefícios</h3>
-                <ul className="flex flex-col gap-2">{popup.benefits.map(b => <li key={b} className="relative pl-5 text-sm text-purple-900 before:absolute before:left-0 before:font-bold before:text-serv-500 before:content-['✓']">{b}</li>)}</ul>
+              <div>
+                <h3 className="mb-3 text-sm font-bold text-serv-950">Benefícios</h3>
+                <ul className="flex flex-col gap-2">{popup.benefits.map(benefit => <li key={benefit} className="border-b border-serv-950/10 py-2 text-sm text-serv-900/70">{benefit}</li>)}</ul>
               </div>
             </div>
-            <div className="text-center">
-              <button type="button" className="rounded-full bg-gradient-to-br from-serv-500 to-serv-700 px-7 py-3.5 text-sm font-bold text-white shadow-[0_4px_20px_rgba(107,70,193,.3)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(107,70,193,.45)] sm:px-8" onClick={() => navigate('/skillpods')}>
-                Contratar esta Skill Pod →
-              </button>
-            </div>
+            <button type="button" className="inline-flex min-h-12 items-center justify-center gap-4 bg-serv-600 px-6 text-sm font-bold text-white transition-colors hover:bg-serv-950 focus-visible:ring-offset-[#f7f5fa]" onClick={() => navigate('/skillpods')}>
+              Ver no catálogo <span aria-hidden="true">↗</span>
+            </button>
           </div>
         </div>
       )}

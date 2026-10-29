@@ -17,7 +17,10 @@ export default {
           100: '#ede9fe',
         },
       },
-      fontFamily: { sans: ['Montserrat', 'Arial', 'sans-serif'] },
+      fontFamily: {
+        sans: ['Montserrat', 'Arial', 'sans-serif'],
+        display: ['Space Grotesk', 'Montserrat', 'sans-serif'],
+      },
       maxWidth: { site: '1200px' },
       borderRadius: { serv: '20px' },
       boxShadow: {

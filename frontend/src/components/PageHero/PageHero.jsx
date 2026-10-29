@@ -2,16 +2,20 @@ import SectionTag from '../SectionTag/SectionTag'
 
 export default function PageHero({ tag, title, highlight, subtitle, children }) {
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-br from-serv-950 via-serv-900 to-serv-800 py-16 text-center text-white sm:py-20">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[min(600px,100vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(107,70,193,.4)_0%,transparent_70%)]" />
-      <div className="container relative z-10">
-        {tag && <SectionTag>{tag}</SectionTag>}
-        <h1 className="mb-4 text-4xl font-black leading-[1.1] sm:text-5xl md:text-[3.2rem]">
-          {title}<br />
-          <span className="bg-gradient-to-br from-serv-300 to-serv-200 bg-clip-text text-transparent">{highlight}</span>
-        </h1>
-        {subtitle && <p className="mx-auto max-w-[520px] text-base leading-relaxed text-white/65">{subtitle}</p>}
-        {children}
+    <section className="relative isolate overflow-hidden bg-serv-950 pb-14 pt-32 text-white sm:pb-20 sm:pt-36 lg:pb-24">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-[.14] [background-image:linear-gradient(rgba(196,181,253,.25)_1px,transparent_1px),linear-gradient(90deg,rgba(196,181,253,.25)_1px,transparent_1px)] [background-size:54px_54px] [mask-image:linear-gradient(100deg,#000,transparent_80%)]" />
+      <span aria-hidden="true" className="pointer-events-none absolute -right-12 top-12 -z-10 font-display text-[22rem] font-bold leading-none text-white/[.035]">+</span>
+      <div className="container grid items-end gap-10 md:grid-cols-[1.2fr_.8fr] lg:gap-16">
+        <div className="max-w-3xl">
+          {tag && <SectionTag>{tag}</SectionTag>}
+          <h1 className="max-w-[12ch] text-[clamp(3.4rem,8vw,6.3rem)] font-bold leading-[.94] tracking-[-.075em] text-white">
+            {title}<span className="block text-serv-200">{highlight}</span>
+          </h1>
+          {subtitle && <p className="mt-6 max-w-xl text-base leading-7 text-white/65 sm:text-lg sm:leading-8">{subtitle}</p>}
+        </div>
+        <aside className="min-h-36 border-l border-serv-200/25 pl-6 md:mb-1 md:pl-8">
+          {children || <p className="max-w-xs text-sm leading-7 text-white/60">Pessoas com experiência e habilidades que se completam, reunidas para fazer o trabalho avançar.</p>}
+        </aside>
       </div>
     </section>
   )

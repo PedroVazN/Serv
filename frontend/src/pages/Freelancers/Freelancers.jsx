@@ -1,40 +1,35 @@
-import { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Header   from '../../components/Header/Header'
-import Footer   from '../../components/Footer/Footer'
+import { Link, useNavigate } from 'react-router-dom'
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
 import PageHero from '../../components/PageHero/PageHero'
 import { freelancers } from '../../data/skillPods'
 
-function FreelancerCard({ f }) {
-  const ref = useRef(null)
-  const onMove = e => {
-    const r = ref.current.getBoundingClientRect()
-    const x = (e.clientX - r.left) / r.width  - .5
-    const y = (e.clientY - r.top)  / r.height - .5
-    ref.current.style.transform = `perspective(700px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateZ(10px)`
-  }
-  const onLeave = () => { ref.current.style.transform = '' }
+function FreelancerCard({ freelancer }) {
+  const navigate = useNavigate()
 
   return (
-    <article ref={ref} className="group relative flex flex-col items-center overflow-hidden rounded-[28px] border border-serv-500/15 bg-white p-7 text-center transition-[border-color,box-shadow] duration-300 will-change-transform [transform-style:preserve-3d] before:absolute before:inset-x-0 before:top-0 before:h-[3px] before:bg-gradient-to-r before:from-serv-700 before:to-serv-400 before:opacity-0 before:transition-opacity hover:border-serv-500/35 hover:shadow-[0_20px_56px_rgba(107,70,193,.15)] hover:before:opacity-100 sm:p-9" onMouseMove={onMove} onMouseLeave={onLeave}>
-      <div className="relative mb-5">
-        <img src={f.image} alt={f.name} className="relative z-10 size-24 rounded-full border-[3px] border-white object-cover shadow-[0_4px_20px_rgba(107,70,193,.2)]" />
-        <div className="pointer-events-none absolute -inset-[5px] rounded-full border-2 border-serv-300 opacity-0 transition-opacity group-hover:opacity-100" />
+    <article className="group grid overflow-hidden border border-serv-950/10 bg-white transition-colors hover:border-serv-500/35 sm:grid-cols-[.78fr_1.22fr]">
+      <div className="relative min-h-56 overflow-hidden bg-serv-900 sm:min-h-0">
+        <img src={freelancer.image} alt={freelancer.name} className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-serv-950/65 to-transparent" />
       </div>
-      <div className="mb-5 flex-1">
-        <h3 className="mb-1.5 text-lg font-extrabold text-serv-900">{f.name}</h3>
-        <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-serv-500">{f.role}</p>
-        <ul className="flex flex-wrap justify-center gap-1.5">
-          {f.skills.map(s => <li key={s} className="rounded-full border border-serv-500/15 bg-[#f4f2f8] px-3 py-1 text-xs font-semibold text-gray-600 transition group-hover:border-serv-500/30 group-hover:bg-serv-100 group-hover:text-serv-700">{s}</li>)}
+      <div className="flex flex-col p-5 sm:p-6 lg:p-7">
+        <div className="mb-5">
+          <p className="text-xs font-semibold text-serv-600">{freelancer.role}</p>
+          <h2 className="mt-1 text-xl font-bold tracking-tight text-serv-950 sm:text-2xl">{freelancer.name}</h2>
+        </div>
+        <ul className="mb-7 flex flex-wrap gap-2" aria-label={`Especialidades de ${freelancer.name}`}>
+          {freelancer.skills.map(skill => <li key={skill} className="border border-serv-950/10 bg-[#f7f5fa] px-2.5 py-1.5 text-xs font-medium text-serv-900/70">{skill}</li>)}
         </ul>
+        <button type="button" className="mt-auto inline-flex min-h-11 items-center justify-between border-t border-serv-950/10 pt-4 text-left text-sm font-bold text-serv-950 transition-colors hover:text-serv-600" onClick={() => navigate('/contratar')}>
+          Conversar sobre um projeto <span aria-hidden="true">↗</span>
+        </button>
       </div>
-      <button className="w-full rounded-full border border-serv-500/35 px-6 py-2.5 text-sm font-bold text-serv-600 transition hover:-translate-y-0.5 hover:border-transparent hover:bg-gradient-to-br hover:from-serv-500 hover:to-serv-700 hover:text-white hover:shadow-md">Ver perfil →</button>
     </article>
   )
 }
 
 export default function Freelancers() {
-  const navigate = useNavigate()
   return (
     <>
       <Header />
@@ -42,24 +37,37 @@ export default function Freelancers() {
         <PageHero
           tag="Talentos individuais"
           title="Freelancers"
-          highlight="disponíveis"
-          subtitle="Profissionais especializados prontos para colaborar no seu projeto. Contrate individualmente ou combine em uma Skill Pod."
-        />
+          highlight="para seu projeto."
+          subtitle="Conheça profissionais especializados e encontre a experiência que falta para sua próxima entrega."
+        >
+          <p className="text-sm leading-7 text-white/65">Profissionais disponíveis para atuar individualmente ou somar forças em uma Skill Pod.</p>
+          <p className="mt-5 font-display text-4xl font-bold tracking-tight text-serv-200">{String(freelancers.length).padStart(2, '0')} <span className="font-sans text-sm font-medium tracking-normal text-white/55">perfis no diretório</span></p>
+        </PageHero>
 
-        <section className="bg-[#f4f2f8] py-16 sm:py-20 lg:py-24">
+        <section className="bg-[#f7f5fa] py-14 sm:py-20 lg:py-24">
           <div className="container">
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 xl:gap-7">
-              {freelancers.map(f => <FreelancerCard key={f.id} f={f} />)}
+            <div className="mb-8 flex flex-col gap-2 border-b border-serv-950/15 pb-5 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-serv-600">Diretório de talentos</p>
+                <h2 className="mt-1 text-2xl font-bold tracking-tight text-serv-950 sm:text-3xl">Conheça quem pode colaborar</h2>
+              </div>
+              <p className="text-sm text-serv-900/55">Escolha um perfil para iniciar seu projeto.</p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
+              {freelancers.map(freelancer => <FreelancerCard key={freelancer.id} freelancer={freelancer} />)}
             </div>
           </div>
         </section>
 
-        <section className="relative isolate overflow-hidden bg-gradient-to-br from-serv-950 to-serv-800 py-16 text-white sm:py-24">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-72 w-[min(500px,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(107,70,193,.4)_0%,transparent_70%)]" />
-          <div className="container relative z-10 text-center">
-            <h2 className="mb-3 text-3xl font-black leading-tight sm:text-4xl">Prefere uma equipe<br /><span className="bg-gradient-to-br from-serv-300 to-serv-200 bg-clip-text text-transparent">completa?</span></h2>
-            <p className="mx-auto mb-8 max-w-xl text-white/65">Monte uma Skill Pod e tenha um time auto-gerido entregando do início ao fim.</p>
-            <button className="rounded-full bg-white px-7 py-3.5 font-extrabold text-serv-700 transition hover:-translate-y-0.5 hover:shadow-xl" onClick={() => navigate('/skillpods')}>Ver Skill Pods →</button>
+        <section className="bg-serv-200 py-12 sm:py-16">
+          <div className="container grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div>
+              <p className="text-sm font-semibold text-serv-700">Mais habilidades, em sintonia</p>
+              <h2 className="mt-2 max-w-2xl text-2xl font-bold leading-tight tracking-tight text-serv-950 sm:text-3xl">Às vezes, o melhor profissional é uma equipe inteira.</h2>
+            </div>
+            <Link to="/skillpods" className="inline-flex min-h-12 items-center justify-between gap-6 border border-serv-950 px-5 text-sm font-bold text-serv-950 transition-colors hover:bg-serv-950 hover:text-white">
+              Ver Skill Pods <span aria-hidden="true">↗</span>
+            </Link>
           </div>
         </section>
       </main>
