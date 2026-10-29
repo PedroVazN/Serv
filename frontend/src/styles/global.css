@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --purple-950: #1a0f2e;
+  --purple-900: #2a1b3d;
+  --purple-800: #3d2560;
+  --purple-700: #422f71;
+  --purple-600: #553c9a;
+  --purple-500: #6b46c1;
+  --purple-400: #805ad5;
+  --purple-300: #9f7aea;
+  --purple-200: #c4b5fd;
+  --purple-100: #ede9fe;
+  --font: 'Montserrat', Arial, sans-serif;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+  --shadow-md: 0 8px 32px rgba(0,0,0,.12);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.18);
+  --shadow-purple: 0 20px 60px rgba(107,70,193,.25);
+  --transition: all .35s cubic-bezier(.25,.46,.45,.94);
+}
+
+@layer base {
+  *, *::before, *::after { @apply box-border; }
+  html { @apply scroll-smooth; }
+  body { @apply m-0 min-h-screen overflow-x-hidden bg-serv-950 font-sans leading-relaxed text-white; }
+  a { @apply text-inherit no-underline; }
+  button { @apply cursor-pointer font-sans; }
+  img { @apply block max-w-full; }
+  ul { @apply list-none; }
+  :focus-visible { @apply outline-none ring-2 ring-serv-200 ring-offset-2 ring-offset-serv-950; }
+  ::selection { @apply bg-serv-400/50 text-white; }
+}
+
+@layer components {
+  .container { @apply mx-auto w-full max-w-site px-5 md:px-10; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

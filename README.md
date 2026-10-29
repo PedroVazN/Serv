@@ -12,7 +12,7 @@ O Serv reúne entregas de diferentes disciplinas: interface web, aplicação des
 
 ## Módulos
 
-- Interface web em HTML, CSS e JavaScript
+- Interface web em React, JavaScript e CSS
 - Telas de cadastro, login, profissionais e contratação
 - Aplicação desktop Java com Swing
 - Cadastro de pessoas, serviços e pedidos
@@ -23,7 +23,9 @@ O Serv reúne entregas de diferentes disciplinas: interface web, aplicação des
 
 ```text
 .
-├── Serv/                    # interface web
+├── frontend/                # site React + Vite (páginas, componentes e ativos)
+├── backend/                 # API Node.js + MongoDB
+├── Serv/Assets/             # recursos legados do projeto
 ├── interfaceServ/           # aplicação Java
 ├── LINGUAGEM DE PROGRAMACAO/
 ├── BANCO DE DADOS/          # scripts SQL
@@ -34,7 +36,19 @@ O Serv reúne entregas de diferentes disciplinas: interface web, aplicação des
 
 ### Interface web
 
-Abra `Serv/index.html` em um navegador.
+O site está implementado em React com Vite. Para executá-lo localmente:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Acesse `http://localhost:5173`. A interface inclui as páginas inicial, contratação, catálogo de Skill Pods, freelancers e login/cadastro. O login usa a API Node.js descrita abaixo.
+
+### API e execução com Docker
+
+A API fica em `backend/` e usa MongoDB. Configure `backend/.env` com `MONGODB_URI` e `JWT_SECRET` e então execute `docker compose up --build` na raiz do repositório. Sem Docker, rode `npm install` e `npm run dev` dentro de `backend/`.
 
 ### Aplicação Java
 
