@@ -1,14 +1,20 @@
 const mongoose = require("mongoose");
 
+let pending;
 const conectar = async () => {
+  if (mongoose.connection.readyState === 1) return mongoose;
+  if (pending) return pending;
   const uri = process.env.MONGODB_URI;
 
   try {
-    await mongoose.connect(uri);
+    pending = mongoose.connect(uri, { serverSelectionTimeoutMS: 10000, maxPoolSize: 10 });
+    await pending;
     console.log(`✅ MongoDB Atlas conectado: ${mongoose.connection.host}`);
   } catch (err) {
-    console.error("❌ Erro ao conectar ao MongoDB:", err.message);
-    process.exit(1);
+    console.error('Falha ao conectar ao MongoDB.');
+    throw err;
+  } finally {
+    pending = undefined;
   }
 };
 

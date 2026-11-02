@@ -58,7 +58,9 @@ exports.atualizar = async (req, res) => {
     });
     if (!servico) return res.status(404).json({ erro: "Serviço não encontrado." });
 
-    Object.assign(servico, req.body);
+    for (const campo of ['titulo', 'descricao', 'preco', 'categoria', 'ativo']) {
+      if (Object.prototype.hasOwnProperty.call(req.body, campo)) servico[campo] = req.body[campo];
+    }
     await servico.save();
     res.json(servico);
   } catch (err) {

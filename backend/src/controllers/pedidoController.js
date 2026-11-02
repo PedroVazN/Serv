@@ -5,12 +5,17 @@ const Servico = require("../models/Servico");
 exports.criar = async (req, res) => {
   try {
     const { itens } = req.body;
+    if (!Array.isArray(itens) || itens.length === 0 || itens.length > 100 ||
+        itens.some(item => !item || !require('mongoose').isObjectIdOrHexString(item.servico) ||
+          (item.quantidade !== undefined && (!Number.isInteger(item.quantidade) || item.quantidade < 1)))) {
+      return res.status(400).json({ erro: 'Informe de 1 a 100 itens com serviço e quantidade válidos.' });
+    }
 
     // Busca preços reais dos serviços no banco
     const itensComPreco = await Promise.all(
       itens.map(async (item) => {
         const servico = await Servico.findById(item.servico);
-        if (!servico) throw new Error(`Serviço ${item.servico} não encontrado.`);
+        if (!servico || !servico.ativo) throw new Error(`Serviço ${item.servico} não encontrado ou inativo.`);
         return {
           servico: servico._id,
           quantidade: item.quantidade || 1,

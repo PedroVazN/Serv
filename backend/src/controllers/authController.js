@@ -10,8 +10,12 @@ const gerarToken = (id) =>
 exports.registro = async (req, res) => {
   try {
     const { nome, email, senha, tipo } = req.body;
+    if (typeof nome !== 'string' || typeof email !== 'string' || typeof senha !== 'string' ||
+        !['cliente', 'freelancer'].includes(tipo || 'cliente')) {
+      return res.status(400).json({ erro: 'Dados de cadastro inválidos.' });
+    }
 
-    const existe = await Usuario.findOne({ email });
+    const existe = await Usuario.findOne({ email: email.trim().toLowerCase() });
     if (existe) {
       return res.status(409).json({ erro: "E-mail já cadastrado." });
     }
@@ -29,12 +33,15 @@ exports.registro = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, senha } = req.body;
+    if (typeof email !== 'string' || typeof senha !== 'string') {
+      return res.status(400).json({ erro: 'Email e senha devem ser textos.' });
+    }
 
     if (!email || !senha) {
       return res.status(400).json({ erro: "E-mail e senha são obrigatórios." });
     }
 
-    const usuario = await Usuario.findOne({ email }).select("+senha");
+    const usuario = await Usuario.findOne({ email: email.trim().toLowerCase() }).select("+senha");
     if (!usuario || !(await usuario.compararSenha(senha))) {
       return res.status(401).json({ erro: "Credenciais inválidas." });
     }

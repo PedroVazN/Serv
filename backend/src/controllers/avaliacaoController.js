@@ -18,6 +18,10 @@ exports.criar = async (req, res) => {
       });
     }
 
+    if (!pedido.itens.some(item => String(item.servico) === servico_id)) {
+      return res.status(400).json({ erro: 'O serviço não pertence ao pedido.' });
+    }
+
     const avaliacao = await Avaliacao.create({
       pedido: pedido_id,
       servico: servico_id,

@@ -32,6 +32,11 @@ exports.criar = async (req, res) => {
 // GET /api/pagamentos/pedido/:pedidoId
 exports.porPedido = async (req, res) => {
   try {
+    const pedido = await Pedido.findById(req.params.pedidoId);
+    if (!pedido) return res.status(404).json({ erro: 'Pedido não encontrado.' });
+    if (req.usuario.tipo !== 'admin' && !pedido.cliente.equals(req.usuario._id)) {
+      return res.status(403).json({ erro: 'Acesso negado.' });
+    }
     const pagamentos = await Pagamento.find({ pedido: req.params.pedidoId }).populate(
       "pedido",
       "status valor_total"

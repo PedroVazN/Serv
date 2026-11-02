@@ -1,5 +1,7 @@
 # Dependências
 node_modules/
+frontend/dist/
+backend/database-check-results.json
 
 # Variáveis de ambiente e credenciais
 .env
