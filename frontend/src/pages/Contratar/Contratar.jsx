@@ -66,8 +66,8 @@ export default function Contratar() {
               <h2 className="mt-2 text-3xl font-bold leading-tight tracking-[-.045em] text-serv-950 sm:text-4xl">Um projeto completo precisa das pessoas certas.</h2>
             </div>
             <div className="grid gap-5 lg:grid-cols-2 lg:gap-7">
-              <ComboCard title="Produtos e serviços digitais" badge="Remoto" image="/Assets/dev_front.png" combos={digitalCombos} />
-              <ComboCard title="Serviços presenciais" badge="Na sua região" image="/Assets/pedreiro.png" combos={presencialCombos} />
+              <ComboCard title="Produtos e serviços digitais" badge="Remoto" image="/Assets/editorial/web.webp" combos={digitalCombos} />
+              <ComboCard title="Serviços presenciais" badge="Na sua região" image="/Assets/editorial/reformas.webp" combos={presencialCombos} />
             </div>
           </div>
         </section>

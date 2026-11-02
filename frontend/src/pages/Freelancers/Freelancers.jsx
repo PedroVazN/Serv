@@ -10,7 +10,7 @@ function FreelancerCard({ freelancer }) {
   return (
     <article className="group grid overflow-hidden border border-serv-950/10 bg-white transition-colors hover:border-serv-500/35 sm:grid-cols-[.78fr_1.22fr]">
       <div className="relative min-h-56 overflow-hidden bg-serv-900 sm:min-h-0">
-        <img src={freelancer.image} alt={freelancer.name} className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
+        <img loading="lazy" decoding="async" src={freelancer.image} alt={`Retrato ilustrativo do perfil ${freelancer.name}`} width="768" height="768" className="absolute inset-0 size-full object-cover object-[50%_35%] transition-transform duration-700 group-hover:scale-[1.035]" />
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-serv-950/65 to-transparent" />
       </div>
       <div className="flex flex-col p-5 sm:p-6 lg:p-7">
@@ -51,7 +51,7 @@ export default function Freelancers() {
                 <p className="text-sm font-semibold text-serv-600">Diretório de talentos</p>
                 <h2 className="mt-1 text-2xl font-bold tracking-tight text-serv-950 sm:text-3xl">Conheça quem pode colaborar</h2>
               </div>
-              <p className="text-sm text-serv-900/55">Escolha um perfil para iniciar seu projeto.</p>
+              <p className="text-sm text-serv-900/55">Perfis demonstrativos com retratos gerados por IA.</p>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
               {freelancers.map(freelancer => <FreelancerCard key={freelancer.id} freelancer={freelancer} />)}

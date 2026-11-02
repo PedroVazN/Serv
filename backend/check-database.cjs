@@ -7,7 +7,8 @@ const check=(name,ok,detail='')=>{results.push({name,ok,detail});console.log((ok
 async function api(method,path,body,token){const r=await fetch('http://localhost:3000/api'+path,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},...(body?{body:JSON.stringify(body)}:{})});return {status:r.status,data:await r.json().catch(()=>null)};}
 async function expect(name,method,path,body,token,status){const r=await api(method,path,body,token);check(name,r.status===status,'HTTP '+r.status+'; esperado '+status);return r.data;}
 async function main(){
- await mongoose.connect(process.env.MONGODB_URI,{autoIndex:false});
+ if (process.env.MONGODB_DB_NAME !== 'serv_desenvolvimento' || process.env.NODE_ENV === 'production' || process.env.VERCEL) throw Error('Execute apenas no banco serv_desenvolvimento.');
+ await mongoose.connect(process.env.MONGODB_URI,{autoIndex:false,dbName:process.env.MONGODB_DB_NAME});
  check('MongoDB ping',(await mongoose.connection.db.admin().ping()).ok===1);
  for(const [n,m] of Object.entries(models)){const indexes=await m.collection.indexes();check('Leitura e índices: '+n,true,`${await m.countDocuments()} documentos; ${indexes.length} índices`);}
  const pass='Check!'+Date.now(); const tokens={};
@@ -80,4 +81,5 @@ main().catch(e=>check('Execução completa',false,e.message)).finally(async()=>{
  }
  fs.writeFileSync('database-check-results.json',JSON.stringify({date:new Date().toISOString(),marker,results},null,2));
  console.log('RESULTADO: '+results.filter(r=>r.ok).length+'/'+results.length+' verificações aprovadas');
+ if (results.some(r=>!r.ok)) process.exitCode = 1;
 });

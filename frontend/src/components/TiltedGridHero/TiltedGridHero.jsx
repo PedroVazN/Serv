@@ -8,7 +8,7 @@ export default function TiltedGridHero({ images = [], children, className = '' }
       {loop.length > 0 && <div className="pointer-events-none absolute inset-0 z-0 opacity-45 [transform-style:flat] [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]" aria-hidden="true">
         {loop.map((image, index) => (
           <article className="absolute left-1/2 top-[56%] aspect-[16/10] w-[clamp(170px,22vw,280px)] animate-orbit overflow-hidden rounded-2xl border border-purple-100/40 bg-[#30204b] shadow-[0_22px_55px_rgba(8,3,20,.45)] [backface-visibility:hidden] [transform-style:preserve-3d] [animation-delay:calc(var(--index)*-4s)] motion-reduce:animate-none max-[760px]:w-[clamp(150px,52vw,230px)]" key={`${image.title}-${index}`} style={{ '--index': index }}>
-            <img src={image.image} alt="" className="block size-full object-cover" />
+            <img loading="lazy" decoding="async" src={image.image} alt="" className="block size-full object-cover" />
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#140a23]/90 to-transparent px-3.5 pb-3 pt-8 text-xs font-extrabold uppercase tracking-wide text-white">{image.title}</span>
           </article>
         ))}

@@ -12,6 +12,10 @@ const itemPedidoSchema = new mongoose.Schema({
 
 const pedidoSchema = new mongoose.Schema(
   {
+    orcamento: { type: mongoose.Schema.Types.ObjectId, ref: 'Orcamento' },
+    profissional: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' },
+    escopo: { type: String, maxlength: 4000 },
+    prazo_dias: { type: Number, min: 1, max: 365 },
     cliente: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Usuario",
@@ -29,6 +33,7 @@ const pedidoSchema = new mongoose.Schema(
 );
 
 // Calcula o valor total automaticamente
+pedidoSchema.index({ orcamento: 1 }, { unique: true, sparse: true });
 pedidoSchema.pre("save", function (next) {
   this.valor_total = this.itens.reduce(
     (acc, item) => acc + item.preco_unitario * item.quantidade,

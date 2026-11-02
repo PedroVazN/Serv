@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 export default function Login() {
   const navigate = useNavigate()
-  const [tab, setTab] = useState('login')
-  const [form, setForm] = useState({ nome: '', email: '', senha: '', tipo: 'cliente' })
+  const { authenticate } = useAuth()
+  const [params] = useSearchParams()
+  const [tab, setTab] = useState(params.get('cadastro') === 'profissional' ? 'register' : 'login')
+  const [form, setForm] = useState({ nome: '', email: '', senha: '', tipo: params.get('cadastro') === 'profissional' ? 'freelancer' : 'cliente' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -15,20 +18,14 @@ export default function Login() {
     setError('')
     setLoading(true)
     try {
-      const endpoint = tab === 'login' ? '/api/auth/login' : '/api/auth/registro'
+      const endpoint = tab === 'login' ? 'login' : 'registro'
       const body = tab === 'login'
         ? { email: form.email, senha: form.senha }
         : { nome: form.nome, email: form.email, senha: form.senha, tipo: form.tipo }
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-      const data = await response.json().catch(() => ({}))
-      if (!response.ok) throw new Error(data.erro || 'Não foi possível acessar sua conta. Confira seus dados e tente novamente.')
-      localStorage.setItem('serv_token', data.token)
-      navigate('/')
+      await authenticate(endpoint, body)
+      const next = params.get('next') || ''
+      navigate(/^\/(painel|servicos(?:\/[a-f\d]{24})?)$/.test(next) ? next : '/painel', { replace: true })
     } catch (requestError) {
       setError(requestError.message)
     } finally {
@@ -57,7 +54,7 @@ export default function Login() {
         </div>
 
         <figure className="relative hidden max-w-lg overflow-hidden border border-white/15 sm:block lg:mt-auto">
-          <img src="/Assets/dev_front.png" alt="Espaço de trabalho de desenvolvimento" className="aspect-[2.5/1] w-full object-cover opacity-70" />
+          <img src="/Assets/editorial/web.webp" alt="Espaço de trabalho de desenvolvimento" className="aspect-[2.5/1] w-full object-cover opacity-70" />
           <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-serv-950/90 to-transparent px-5 pb-4 pt-10 text-sm font-semibold text-white">Talentos diferentes, trabalhando na mesma direção.</figcaption>
         </figure>
       </section>

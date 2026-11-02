@@ -1,5 +1,6 @@
 const Pedido = require("../models/Pedido");
 const Servico = require("../models/Servico");
+const Avaliacao = require('../models/Avaliacao');
 
 // POST /api/pedidos
 exports.criar = async (req, res) => {
@@ -45,12 +46,14 @@ exports.meusPedidos = async (req, res) => {
 
     const pedidos = await Pedido.find(filtro)
       .populate("itens.servico", "titulo preco")
+      .populate('profissional', 'nome')
       .sort({ data_pedido: -1 })
       .skip((page - 1) * limit)
       .limit(Number(limit));
 
     const total = await Pedido.countDocuments(filtro);
-    res.json({ total, pagina: Number(page), resultados: pedidos });
+    const reviewed = new Set((await Avaliacao.find({ avaliador: req.usuario._id, pedido: { $in: pedidos.map(p => p._id) } }).distinct('pedido')).map(String));
+    res.json({ total, pagina: Number(page), resultados: pedidos.map(pedido => ({ ...pedido.toObject(), avaliado: reviewed.has(String(pedido._id)) })) });
   } catch (err) {
     res.status(500).json({ erro: err.message });
   }
@@ -67,7 +70,8 @@ exports.buscarPorId = async (req, res) => {
 
     // Só o próprio cliente ou admin pode ver
     const ehDono = pedido.cliente._id.equals(req.usuario._id);
-    if (!ehDono && req.usuario.tipo !== "admin") {
+    const ehProfissional = pedido.profissional?.equals(req.usuario._id);
+    if (!ehDono && !ehProfissional && req.usuario.tipo !== "admin") {
       return res.status(403).json({ erro: "Acesso negado." });
     }
 
@@ -75,6 +79,28 @@ exports.buscarPorId = async (req, res) => {
   } catch (err) {
     res.status(500).json({ erro: err.message });
   }
+};
+
+exports.recebidos = async (req, res) => {
+  try {
+    const page = Number(req.query.page || 1), limit = Number(req.query.limit || 20);
+    const filtro = { profissional: req.usuario._id };
+    const [resultados, total] = await Promise.all([
+      Pedido.find(filtro).populate('cliente', 'nome').populate('itens.servico', 'titulo')
+        .sort({ data_pedido: -1 }).skip((page - 1) * limit).limit(limit),
+      Pedido.countDocuments(filtro),
+    ]);
+    res.json({ resultados, total, pagina: page });
+  } catch { res.status(500).json({ erro: 'Não foi possível carregar os pedidos.' }); }
+};
+
+exports.concluir = async (req, res) => {
+  try {
+    const pedido = await Pedido.findOneAndUpdate({ _id: req.params.id, cliente: req.usuario._id,
+      orcamento: { $exists: true }, status: 'em_andamento' }, { $set: { status: 'concluido' } }, { new: true });
+    if (!pedido) return res.status(409).json({ erro: 'Pedido indisponível para conclusão nesta conta.' });
+    res.json(pedido);
+  } catch { res.status(500).json({ erro: 'Não foi possível concluir o pedido.' }); }
 };
 
 // PATCH /api/pedidos/:id/status

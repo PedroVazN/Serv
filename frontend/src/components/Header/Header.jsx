@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 const links = [
   { to: '/contratar', label: 'Skill Pods' },
@@ -10,6 +11,7 @@ const links = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
+  const { user } = useAuth()
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -41,7 +43,7 @@ export default function Header() {
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-5">
-            <Link to="/login" className="hidden text-sm font-semibold text-white/70 transition-colors hover:text-white min-[901px]:inline-flex">Entrar</Link>
+            <Link to={user ? "/painel" : "/login"} className="hidden text-sm font-semibold text-white/70 transition-colors hover:text-white min-[901px]:inline-flex">{user ? "Meu painel" : "Entrar"}</Link>
             <button type="button" onClick={() => { closeMenu(); navigate('/contratar') }} className="rounded-full bg-serv-200 px-5 py-2.5 text-sm font-bold text-serv-950 transition-colors hover:bg-white focus-visible:ring-offset-serv-950 max-[440px]:px-3.5 max-[440px]:text-xs">
               Começar projeto
             </button>

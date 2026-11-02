@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { proteger, restringir } = require('../middleware/auth');
+const ctrl = require('../controllers/orcamentoController');
+router.use(proteger);
+router.get('/', ctrl.listar);
+router.post('/', restringir('cliente'), ctrl.criar);
+router.patch('/:id/responder', restringir('freelancer'), ctrl.responder);
+router.post('/:id/aceitar', restringir('cliente'), ctrl.aceitar);
+router.patch('/:id/recusar', restringir('cliente', 'freelancer'), ctrl.recusar);
+module.exports = router;

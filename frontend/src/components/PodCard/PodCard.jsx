@@ -8,7 +8,7 @@ export default function PodCard({ pod }) {
     <article className={`group flex h-full flex-col overflow-hidden border bg-white transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 ${pod.featured ? 'border-serv-500/35 shadow-[0_18px_50px_rgba(42,27,61,.1)] hover:shadow-[0_24px_60px_rgba(42,27,61,.16)]' : 'border-serv-950/10 hover:border-serv-500/30 hover:shadow-[0_18px_50px_rgba(42,27,61,.1)]'}`}>
       <div className="relative aspect-[16/9] overflow-hidden bg-serv-900">
         {pod.image ? (
-          <img src={pod.image} alt="" aria-hidden="true" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
+          <img loading="lazy" decoding="async" src={pod.image} alt="" aria-hidden="true" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.035]" />
         ) : (
           <div className="grid size-full place-items-center bg-[radial-gradient(circle_at_70%_25%,rgba(196,181,253,.28),transparent_30%),linear-gradient(135deg,#3d2560,#1a0f2e)]">
             <span className="font-display text-7xl text-white/90" aria-hidden="true">{pod.emoji}</span>
@@ -17,7 +17,7 @@ export default function PodCard({ pod }) {
         <div className="absolute inset-0 bg-gradient-to-t from-serv-950/65 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-5">
           <span className="text-xs font-semibold text-white/80">{pod.size}</span>
-          <span className={`border px-2.5 py-1 text-[.68rem] font-bold ${pod.category === 'presencial' ? 'border-emerald-200/50 bg-emerald-950/45 text-emerald-100' : 'border-white/35 bg-serv-950/45 text-white'}`}>{category}</span>
+          <span className={`border px-2.5 py-1 text-[.68rem] font-bold ${pod.category === 'presencial' ? 'border-serv-200/50 bg-serv-950/45 text-serv-100' : 'border-white/35 bg-serv-950/45 text-white'}`}>{category}</span>
         </div>
         {pod.featured && <span className="absolute left-4 top-4 bg-serv-200 px-3 py-1 text-[.68rem] font-bold text-serv-950">Em destaque</span>}
       </div>

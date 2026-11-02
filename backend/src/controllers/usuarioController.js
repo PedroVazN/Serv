@@ -74,7 +74,8 @@ exports.listarFreelancers = async (req, res) => {
     const filtro = { tipo: "freelancer" };
     if (area) filtro["perfil_freelancer.area_atuacao"] = new RegExp(area.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "i");
 
-    const freelancers = await Usuario.find(filtro)
+    const freelancers = await Usuario.find(filtro).select('nome perfil_freelancer')
+      .sort({ nome: 1, _id: 1 })
       .skip((page - 1) * limit)
       .limit(Number(limit));
 
@@ -83,4 +84,12 @@ exports.listarFreelancers = async (req, res) => {
   } catch (err) {
     res.status(500).json({ erro: err.message });
   }
+};
+
+exports.perfilPublico = async (req, res) => {
+  try {
+    const usuario = await Usuario.findOne({ _id: req.params.id, tipo: 'freelancer' }).select('nome perfil_freelancer');
+    if (!usuario) return res.status(404).json({ erro: 'Profissional não encontrado.' });
+    res.json(usuario);
+  } catch { res.status(500).json({ erro: 'Não foi possível carregar o perfil.' }); }
 };

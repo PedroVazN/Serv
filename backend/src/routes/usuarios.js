@@ -3,6 +3,7 @@ const ctrl = require("../controllers/usuarioController");
 const { proteger, restringir } = require("../middleware/auth");
 
 router.get("/freelancers", ctrl.listarFreelancers);
+router.get('/freelancers/:id', ctrl.perfilPublico);
 router.get("/", proteger, restringir("admin"), ctrl.listar);
 router.get("/:id", proteger, ctrl.buscarPorId);
 router.patch("/:id", proteger, ctrl.atualizar);

@@ -2,7 +2,7 @@ export const carouselPods = [
   {
     id: 'web',
     title: 'Skill Pod Web',
-    image: '/Assets/dev_front.png',
+    image: '/Assets/editorial/web.webp',
     tag: 'Digital',
     description: 'Equipe especializada em desenvolvimento web completo, desde o front-end até o back-end, garantindo soluções digitais modernas e eficientes.',
     professionals: ['Desenvolvedor Front-end Senior', 'Desenvolvedor Back-end Senior', 'DevOps Engineer', 'UI/UX Designer'],
@@ -11,7 +11,7 @@ export const carouselPods = [
   {
     id: 'design',
     title: 'Skill Pod Design',
-    image: '/Assets/design_grafico.png',
+    image: '/Assets/editorial/design.webp',
     tag: 'Digital',
     description: 'Time criativo focado em design gráfico e identidade visual, transformando ideias em designs impactantes e memoráveis.',
     professionals: ['Designer Gráfico Senior', 'UI/UX Designer', 'Ilustrador Digital', 'Motion Designer'],
@@ -20,7 +20,7 @@ export const carouselPods = [
   {
     id: 'marketing',
     title: 'Skill Pod Marketing',
-    image: '/Assets/marketing_dig.png',
+    image: '/Assets/editorial/marketing.webp',
     tag: 'Digital',
     description: 'Equipe de marketing digital completa, especializada em estratégias de crescimento e engajamento nas redes sociais.',
     professionals: ['Social Media Manager', 'Content Creator', 'Analista de Marketing Digital', 'Copywriter'],
@@ -29,7 +29,7 @@ export const carouselPods = [
   {
     id: 'consultoria',
     title: 'Skill Pod Consultoria',
-    image: '/Assets/consultoria.png',
+    image: '/Assets/editorial/consultoria.webp',
     tag: 'Digital',
     description: 'Time de consultores especializados em diferentes áreas, oferecendo soluções estratégicas para seu negócio.',
     professionals: ['Consultor de Negócios', 'Analista Financeiro', 'Especialista em Processos', 'Consultor de RH'],
@@ -38,7 +38,7 @@ export const carouselPods = [
   {
     id: 'construcao',
     title: 'Skill Pod Construção',
-    image: '/Assets/pintor.png',
+    image: '/Assets/editorial/pintura.webp',
     tag: 'Presencial',
     description: 'Equipe completa para projetos de construção, desde a pintura até acabamentos finais, com qualidade e pontualidade.',
     professionals: ['Mestre de Obras', 'Pintor Profissional', 'Ajudante de Construção', 'Especialista em Acabamentos'],
@@ -47,7 +47,7 @@ export const carouselPods = [
   {
     id: 'reformas',
     title: 'Skill Pod Reformas',
-    image: '/Assets/pedreiro.png',
+    image: '/Assets/editorial/reformas.webp',
     tag: 'Presencial',
     description: 'Time especializado em reformas e manutenção, oferecendo soluções completas para sua residência ou empresa.',
     professionals: ['Pedreiro Especialista', 'Eletricista', 'Encanador', 'Ajudante de Obras'],
@@ -58,7 +58,7 @@ export const carouselPods = [
 export const catalogPods = [
   {
     id: 'web-excellence',
-    image: '/Assets/dev_front.png',
+    image: '/Assets/editorial/web.webp',
     emoji: '💻',
     name: 'Web Excellence',
     desc: 'Cria seu produto digital do zero — do design responsivo ao backend robusto.',
@@ -70,6 +70,7 @@ export const catalogPods = [
   },
   {
     id: 'mobile-rockets',
+    image: '/Assets/editorial/web.webp',
     emoji: '📱',
     name: 'Mobile Rockets',
     desc: 'Leva seu app do protótipo à loja em tempo recorde. iOS, Android e cloud.',
@@ -81,7 +82,7 @@ export const catalogPods = [
   },
   {
     id: 'data-insights',
-    image: '/Assets/consultoria.png',
+    image: '/Assets/editorial/consultoria.webp',
     emoji: '🧠',
     name: 'Data Insights',
     desc: 'Transforma dados em vantagem competitiva. Pipelines, ML, dashboards.',
@@ -94,7 +95,7 @@ export const catalogPods = [
   },
   {
     id: 'marketing-boost',
-    image: '/Assets/marketing_dig.png',
+    image: '/Assets/editorial/marketing.webp',
     emoji: '📈',
     name: 'Marketing Boost',
     desc: 'Conteúdo persuasivo e tráfego pago. Mais vendas, mais reconhecimento.',
@@ -106,7 +107,7 @@ export const catalogPods = [
   },
   {
     id: 'ecommerce-squad',
-    image: '/Assets/design_grafico.png',
+    image: '/Assets/editorial/design.webp',
     emoji: '🛒',
     name: 'E-commerce Squad',
     desc: 'Lança sua loja virtual do zero — plataforma, design, tráfego e gestão.',
@@ -118,6 +119,7 @@ export const catalogPods = [
   },
   {
     id: 'infra-safe',
+    image: '/Assets/editorial/consultoria.webp',
     emoji: '🔒',
     name: 'Infra Safe',
     desc: 'Infraestrutura cloud escalável com segurança de ponta.',
@@ -129,7 +131,7 @@ export const catalogPods = [
   },
   {
     id: 'construcao-premium',
-    image: '/Assets/pintor.png',
+    image: '/Assets/editorial/pintura.webp',
     emoji: '🏗️',
     name: 'Construção Premium',
     desc: 'Obra civil ou acabamento. Pontualidade, qualidade e limpeza garantidos.',
@@ -141,7 +143,7 @@ export const catalogPods = [
   },
   {
     id: 'reformas',
-    image: '/Assets/pedreiro.png',
+    image: '/Assets/editorial/reformas.webp',
     emoji: '🔨',
     name: 'Reformas & Manutenção',
     desc: 'Reforma residencial ou comercial com orçamento detalhado e prazo cumprido.',
@@ -154,10 +156,10 @@ export const catalogPods = [
 ]
 
 export const freelancers = [
-  { id: 1, name: 'João Silva',     role: 'Front-end Developer', image: '/Assets/freelancer1.jpg', skills: ['React', 'JavaScript', 'HTML & CSS'] },
-  { id: 2, name: 'Maria Souza',    role: 'UI/UX Designer',       image: '/Assets/freelancer2.jpg', skills: ['Figma', 'Design Systems', 'Prototipagem'] },
-  { id: 3, name: 'Carlos Lima',    role: 'Back-end Developer',   image: '/Assets/freelancer3.jpg', skills: ['Node.js', 'TypeScript', 'SQL'] },
-  { id: 4, name: 'Ana Pereira',    role: 'DevOps Engineer',      image: '/Assets/freelancer4.jpg', skills: ['AWS', 'Docker', 'Kubernetes'] },
-  { id: 5, name: 'Rafael Costa',   role: 'Mobile Developer',     image: '/Assets/freelancer5.jpg', skills: ['Flutter', 'Dart', 'Firebase'] },
-  { id: 6, name: 'Beatriz Alves',  role: 'Data Scientist',       image: '/Assets/freelancer6.jpg', skills: ['Python', 'Machine Learning', 'SQL'] },
+  { id: 1, name: 'João Silva',     role: 'Front-end Developer', image: '/Assets/editorial/freelancer1.webp', skills: ['React', 'JavaScript', 'HTML & CSS'] },
+  { id: 2, name: 'Maria Souza',    role: 'UI/UX Designer',       image: '/Assets/editorial/freelancer2.webp', skills: ['Figma', 'Design Systems', 'Prototipagem'] },
+  { id: 3, name: 'Carlos Lima',    role: 'Back-end Developer',   image: '/Assets/editorial/freelancer3.webp', skills: ['Node.js', 'TypeScript', 'SQL'] },
+  { id: 4, name: 'Ana Pereira',    role: 'DevOps Engineer',      image: '/Assets/editorial/freelancer4.webp', skills: ['AWS', 'Docker', 'Kubernetes'] },
+  { id: 5, name: 'Rafael Costa',   role: 'Mobile Developer',     image: '/Assets/editorial/freelancer5.webp', skills: ['Flutter', 'Dart', 'Firebase'] },
+  { id: 6, name: 'Beatriz Alves',  role: 'Data Scientist',       image: '/Assets/editorial/freelancer6.webp', skills: ['Python', 'Machine Learning', 'SQL'] },
 ]

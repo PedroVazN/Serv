@@ -7,9 +7,9 @@ const servicoSchema = new mongoose.Schema(
       ref: "Usuario",
       required: true,
     },
-    titulo: { type: String, required: true, trim: true },
-    descricao: { type: String, required: true },
-    preco: { type: Number, required: true, min: 0 },
+    titulo: { type: String, required: true, trim: true, maxlength: 160 },
+    descricao: { type: String, required: true, maxlength: 4000 },
+    preco: { type: Number, required: true, min: 0, max: 1000000 },
     categoria: {
       type: String,
       enum: [

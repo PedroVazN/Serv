@@ -1,0 +1,82 @@
+{
+  "generator": "Built-in image_gen",
+  "purpose": "Imagens ilustrativas do SERV+. Retratos são de pessoas fictícias para perfis demonstrativos.",
+  "assets": [
+    {
+      "key": "web",
+      "file": "/Assets/editorial/web.webp",
+      "prompt": "Use case: photorealistic-natural. Create one premium editorial photograph for Brazilian services marketplace SERV+, development team website hero. Landscape 3:2 photograph, three Brazilian software professionals in their late twenties and thirties collaborating at a real light oak desk in a contemporary modest São Paulo studio. A Black woman developer foreground typing on laptop, male colleague beside her reviewing screen, another woman pointing at a small interface sketch. Candid focused interaction, not posing for camera. Natural window light from the side, believable skin texture and hands, warm off-white walls, muted plum accent shirt, dark charcoal monitors, green plant. Strong composition that remains useful with center 16:9 crop and narrow banner crop, subjects and work in middle 60%, no close cropped heads. Refined commercial documentary photography, 35mm lens, realistic depth of field. No readable text, no lettering, no logos, no watermark, no collage, no fake UI screenshots, no glossy AI aesthetic. Output a single finished photo."
+    },
+    {
+      "key": "design",
+      "prompt": "Use case: photorealistic-natural. One landscape 3:2 premium editorial photograph for SERV+, Brazilian marketplace for collaborative professional services. Authentic contemporary São Paulo setting, natural soft window light, warm off-white and charcoal tones, a subtle muted plum accent in clothing or object. Realistic skin texture, anatomically correct hands, candid documentary moment, refined but not luxurious, not posed stock-photo smiles. Strong center framing with main activity and faces in middle 60% so it can be cropped to 16:9. No readable text, logos, letters, brands, watermark, collage, illustration or synthetic plastic skin. Two Brazilian graphic designers, a woman with short dark curls and a man with medium brown skin, at a real design studio desk comparing physical color swatches, geometric printed packaging samples and abstract layouts on a tablet. A warm overhead diagonal composition showing hands and tangible material design work, with faces visible, thoughtful collaboration.",
+      "file": "/Assets/editorial/design.webp"
+    },
+    {
+      "key": "marketing",
+      "prompt": "Use case: photorealistic-natural. One landscape 3:2 premium editorial photograph for SERV+, Brazilian marketplace for collaborative professional services. Authentic contemporary São Paulo setting, natural soft window light, warm off-white and charcoal tones, a subtle muted plum accent in clothing or object. Realistic skin texture, anatomically correct hands, candid documentary moment, refined but not luxurious, not posed stock-photo smiles. Strong center framing with main activity and faces in middle 60% so it can be cropped to 16:9. No readable text, logos, letters, brands, watermark, collage, illustration or synthetic plastic skin. A small Brazilian creative marketing team planning a campaign at a bright studio table. A brown-skinned female strategist in muted plum shirt discussing a storyboard with a male content creator and a Black woman colleague. A real camera and unbranded laptop with abstract out-of-focus charts, swatches and small product packaging. Natural productive conversation, no presentation to camera.",
+      "file": "/Assets/editorial/marketing.webp"
+    },
+    {
+      "key": "consultoria",
+      "prompt": "Use case: photorealistic-natural. One landscape 3:2 premium editorial photograph for SERV+, Brazilian marketplace for collaborative professional services. Authentic contemporary São Paulo setting, natural soft window light, warm off-white and charcoal tones, a subtle muted plum accent in clothing or object. Realistic skin texture, anatomically correct hands, candid documentary moment, refined but not luxurious, not posed stock-photo smiles. Strong center framing with main activity and faces in middle 60% so it can be cropped to 16:9. No readable text, logos, letters, brands, watermark, collage, illustration or synthetic plastic skin. Two Brazilian business and data consultants, a Black man around 40 and an East Asian Brazilian woman around 32, working together at a wood meeting table. Reviewing clean abstract data visualizations on laptop and printed charts without readable numbers or text. Small glass-walled office, quiet concentration, notebook, coffee. Credible business analysis scene.",
+      "file": "/Assets/editorial/consultoria.webp"
+    },
+    {
+      "key": "pintura",
+      "prompt": "Use case: photorealistic-natural. One landscape 3:2 premium editorial photograph for SERV+, Brazilian marketplace for collaborative professional services. Authentic contemporary São Paulo setting, natural soft window light, warm off-white and charcoal tones, a subtle muted plum accent in clothing or object. Realistic skin texture, anatomically correct hands, candid documentary moment, refined but not luxurious, not posed stock-photo smiles. Strong center framing with main activity and faces in middle 60% so it can be cropped to 16:9. No readable text, logos, letters, brands, watermark, collage, illustration or synthetic plastic skin. An experienced Brazilian professional painter, woman with brown skin around 35, applying warm white paint to a plaster wall in a bright residential interior. Correctly uses roller attached to short pole, both feet on floor, safety glasses, protective work clothes, covered floor and neatly arranged tray. A colleague in background checking finish. Safe professional craft, beautiful natural side lighting, actual work in progress, no hard hat indoors unless necessary.",
+      "file": "/Assets/editorial/pintura.webp"
+    },
+    {
+      "key": "reformas",
+      "prompt": "Use case: photorealistic-natural. One landscape 3:2 premium editorial photograph for SERV+, Brazilian marketplace for collaborative professional services. Authentic contemporary São Paulo setting, natural soft window light, warm off-white and charcoal tones, a subtle muted plum accent in clothing or object. Realistic skin texture, anatomically correct hands, candid documentary moment, refined but not luxurious, not posed stock-photo smiles. Strong center framing with main activity and faces in middle 60% so it can be cropped to 16:9. No readable text, logos, letters, brands, watermark, collage, illustration or synthetic plastic skin. Two Brazilian skilled renovation tradespeople in a clean sunlit unfinished apartment, a Black male craftsperson around 40 and a female colleague around 30, both wearing safety glasses and appropriate workwear. Kneeling at a low stable work surface carefully checking large ceramic tile alignment with measuring tape and a spirit level. No active power tools, no unsafe wiring, no ambiguous dangerous work. Warm raw plaster, craftsmanship, real tools, natural daylight.",
+      "file": "/Assets/editorial/reformas.webp"
+    },
+    {
+      "key": "freelancer1",
+      "prompt": "Use case: photorealistic-natural. One square premium editorial head-and-shoulders portrait for a fictional sample freelancer profile on Brazilian professional marketplace SERV+. Single person, centered head with generous headroom, eyes looking at camera, relaxed genuine small smile. Whole head and shoulders in frame, face centered in top-middle so portrait works as a square and 4:5 crop. Modern quiet creative studio softly blurred behind, warm ivory wall, natural window light, subtle muted plum and charcoal palette, realistic skin texture and natural hair, eye-level 85mm portrait photography. Friendly and competent, approachable everyday clothing, no suit, no laptop, no props. No logos, no text, no watermark, no collage, no beauty-filter skin. Brazilian man about 29, medium brown skin, short dark curly hair, light stubble, charcoal cotton t-shirt, web developer.",
+      "file": "/Assets/editorial/freelancer1.webp"
+    },
+    {
+      "key": "freelancer2",
+      "prompt": "Use case: photorealistic-natural. One square premium editorial head-and-shoulders portrait for a fictional sample freelancer profile on Brazilian professional marketplace SERV+. Single person, centered head with generous headroom, eyes looking at camera, relaxed genuine small smile. Whole head and shoulders in frame, face centered in top-middle so portrait works as a square and 4:5 crop. Modern quiet creative studio softly blurred behind, warm ivory wall, natural window light, subtle muted plum and charcoal palette, realistic skin texture and natural hair, eye-level 85mm portrait photography. Friendly and competent, approachable everyday clothing, no suit, no laptop, no props. No logos, no text, no watermark, no collage, no beauty-filter skin. Brazilian woman about 28, light olive skin, shoulder-length dark wavy hair, off-white linen shirt, designer.",
+      "file": "/Assets/editorial/freelancer2.webp"
+    },
+    {
+      "key": "freelancer3",
+      "prompt": "Use case: photorealistic-natural. One square premium editorial head-and-shoulders portrait for a fictional sample freelancer profile on Brazilian professional marketplace SERV+. Single person, centered head with generous headroom, eyes looking at camera, relaxed genuine small smile. Whole head and shoulders in frame, face centered in top-middle so portrait works as a square and 4:5 crop. Modern quiet creative studio softly blurred behind, warm ivory wall, natural window light, subtle muted plum and charcoal palette, realistic skin texture and natural hair, eye-level 85mm portrait photography. Friendly and competent, approachable everyday clothing, no suit, no laptop, no props. No logos, no text, no watermark, no collage, no beauty-filter skin. Black Brazilian man about 35, close cropped natural hair and short beard, dark olive overshirt over ivory t-shirt, backend developer.",
+      "file": "/Assets/editorial/freelancer3.webp"
+    },
+    {
+      "key": "freelancer4",
+      "prompt": "Use case: photorealistic-natural. One square premium editorial head-and-shoulders portrait for a fictional sample freelancer profile on Brazilian professional marketplace SERV+. Single person, centered head with generous headroom, eyes looking at camera, relaxed genuine small smile. Whole head and shoulders in frame, face centered in top-middle so portrait works as a square and 4:5 crop. Modern quiet creative studio softly blurred behind, warm ivory wall, natural window light, subtle muted plum and charcoal palette, realistic skin texture and natural hair, eye-level 85mm portrait photography. Friendly and competent, approachable everyday clothing, no suit, no laptop, no props. No logos, no text, no watermark, no collage, no beauty-filter skin. East Asian Brazilian woman about 31, straight shoulder-length black hair, fine understated glasses, muted plum cotton shirt, infrastructure engineer.",
+      "file": "/Assets/editorial/freelancer4.webp"
+    },
+    {
+      "key": "freelancer5",
+      "prompt": "Use case: photorealistic-natural. One square premium editorial head-and-shoulders portrait for a fictional sample freelancer profile on Brazilian professional marketplace SERV+. Single person, centered head with generous headroom, eyes looking at camera, relaxed genuine small smile. Whole head and shoulders in frame, face centered in top-middle so portrait works as a square and 4:5 crop. Modern quiet creative studio softly blurred behind, warm ivory wall, natural window light, subtle muted plum and charcoal palette, realistic skin texture and natural hair, eye-level 85mm portrait photography. Friendly and competent, approachable everyday clothing, no suit, no laptop, no props. No logos, no text, no watermark, no collage, no beauty-filter skin. Brazilian man about 30, light tan skin, medium-length dark wavy hair and slight mustache, warm beige cotton overshirt, mobile developer.",
+      "file": "/Assets/editorial/freelancer5.webp"
+    },
+    {
+      "key": "freelancer6",
+      "prompt": "Use case: photorealistic-natural. One square premium editorial head-and-shoulders portrait for a fictional sample freelancer profile on Brazilian professional marketplace SERV+. Single person, centered head with generous headroom, eyes looking at camera, relaxed genuine small smile. Whole head and shoulders in frame, face centered in top-middle so portrait works as a square and 4:5 crop. Modern quiet creative studio softly blurred behind, warm ivory wall, natural window light, subtle muted plum and charcoal palette, realistic skin texture and natural hair, eye-level 85mm portrait photography. Friendly and competent, approachable everyday clothing, no suit, no laptop, no props. No logos, no text, no watermark, no collage, no beauty-filter skin. Black Brazilian woman about 32, medium brown skin, natural curly hair in a loose rounded shape, dark charcoal blouse and tiny simple earrings, data scientist.",
+      "file": "/Assets/editorial/freelancer6.webp"
+    }
+  ],
+  "optimization": {
+    "scenesMaxSize": [
+      1440,
+      960
+    ],
+    "portraitsMaxSize": [
+      768,
+      768
+    ],
+    "avatarSize": [
+      96,
+      96
+    ],
+    "webpQuality": 84
+  },
+  "originals": "Preservados no diretório generated_images do Codex. Imagens anteriores do projeto preservadas em frontend/public/Assets."
+}

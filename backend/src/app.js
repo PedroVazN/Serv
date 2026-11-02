@@ -48,9 +48,13 @@ app.use('/api', (req, res, next) => {
   }
   const segments = req.path.split('/').filter(Boolean);
   const ids = [];
-  if (segments[0] === 'usuarios' && segments[1] && !['freelancers'].includes(segments[1])) ids.push(segments[1]);
+  if (segments[0] === 'usuarios' && segments[1]) {
+    if (segments[1] === 'freelancers') { if (segments[2]) ids.push(segments[2]); }
+    else ids.push(segments[1]);
+  }
   if (segments[0] === 'servicos' && segments[1] && segments[1] !== 'meus') ids.push(segments[1]);
-  if (segments[0] === 'pedidos' && segments[1] && segments[1] !== 'todos') ids.push(segments[1]);
+  if (segments[0] === 'pedidos' && segments[1] && !['todos', 'recebidos'].includes(segments[1])) ids.push(segments[1]);
+  if (segments[0] === 'orcamentos' && segments[1]) ids.push(segments[1]);
   if (segments[0] === 'pagamentos' && segments[1]) ids.push(segments[1] === 'pedido' ? segments[2] : segments[1]);
   if (segments[0] === 'avaliacoes' && segments[1] === 'servico') ids.push(segments[2]);
   if (ids.some(id => !require('mongoose').isObjectIdOrHexString(id))) {
@@ -74,6 +78,7 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/usuarios", require("./routes/usuarios"));
 app.use("/api/servicos", require("./routes/servicos"));
 app.use("/api/pedidos", require("./routes/pedidos"));
+app.use('/api/orcamentos', require('./routes/orcamentos'));
 app.use("/api/avaliacoes", require("./routes/avaliacoes"));
 app.use("/api/pagamentos", require("./routes/pagamentos"));
 

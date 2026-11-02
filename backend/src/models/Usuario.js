@@ -10,15 +10,21 @@ const infoUsuarioSchema = new mongoose.Schema({
 });
 
 const perfilFreelancerSchema = new mongoose.Schema({
-  descricao: String,
-  area_atuacao: String,
-  experiencia: String,
+  descricao: { type: String, maxlength: 2000 },
+  area_atuacao: { type: String, maxlength: 120 },
+  experiencia: { type: String, maxlength: 2000 },
+  disponibilidade: { type: String, enum: ['disponivel', 'indisponivel'], default: 'disponivel' },
+  portfolio_url: { type: String, maxlength: 500, validate: value => {
+    if (!value) return true;
+    try { const url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password; }
+    catch { return false; }
+  } },
 });
 
 const usuarioSchema = new mongoose.Schema(
   {
-    nome: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    nome: { type: String, required: true, trim: true, maxlength: 120 },
+    email: { type: String, required: true, unique: true, lowercase: true, trim: true, maxlength: 254, match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
     senha: { type: String, required: true, minlength: 6 },
     tipo: {
       type: String,

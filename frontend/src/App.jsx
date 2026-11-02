@@ -1,21 +1,31 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Contratar from './pages/Contratar/Contratar'
 import SkillPods from './pages/SkillPods/SkillPods'
-import Freelancers from './pages/Freelancers/Freelancers'
 import Login from './pages/Login/Login'
+import { AuthProvider } from './context/AuthContext'
+import { FreelancersDirectory, ServicesDirectory, ProfessionalProfile, ServiceDetail } from './pages/Marketplace/Directory'
+import Dashboard from './pages/Marketplace/Dashboard'
 
 export default function App() {
   return (
     <BrowserRouter>
+      <AuthProvider>
+      <ScrollToTop />
       <Routes>
         <Route path="/"            element={<Home />} />
         <Route path="/contratar"   element={<Contratar />} />
         <Route path="/skillpods"   element={<SkillPods />} />
-        <Route path="/freelancers" element={<Freelancers />} />
+        <Route path="/freelancers" element={<FreelancersDirectory />} />
+        <Route path="/servicos" element={<ServicesDirectory />} />
+        <Route path="/servicos/:id" element={<ServiceDetail />} />
+        <Route path="/profissionais/:id" element={<ProfessionalProfile />} />
+        <Route path="/painel" element={<Dashboard />} />
         <Route path="/login"       element={<Login />} />
         <Route path="*"            element={<NotFound />} />
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
@@ -32,4 +42,10 @@ function NotFound() {
       </div>
     </main>
   )
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }, [pathname])
+  return null
 }

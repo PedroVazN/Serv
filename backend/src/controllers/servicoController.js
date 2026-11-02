@@ -5,12 +5,16 @@ exports.listar = async (req, res) => {
   try {
     const { categoria, busca, page = 1, limit = 20 } = req.query;
     const filtro = { ativo: true };
+    if (req.query.profissional) {
+      if (!require('mongoose').isObjectIdOrHexString(req.query.profissional)) return res.status(400).json({ erro: 'Profissional inválido.' });
+      filtro.usuario = req.query.profissional;
+    }
 
     if (categoria) filtro.categoria = categoria;
     if (busca) filtro.$text = { $search: busca };
 
     const servicos = await Servico.find(filtro)
-      .populate("usuario", "nome email perfil_freelancer")
+      .populate("usuario", "nome perfil_freelancer")
       .skip((page - 1) * limit)
       .limit(Number(limit))
       .sort({ data_criacao: -1 });
@@ -25,9 +29,9 @@ exports.listar = async (req, res) => {
 // GET /api/servicos/:id
 exports.buscarPorId = async (req, res) => {
   try {
-    const servico = await Servico.findById(req.params.id).populate(
+    const servico = await Servico.findOne({ _id: req.params.id, ativo: true }).populate(
       "usuario",
-      "nome email perfil_freelancer"
+      "nome perfil_freelancer"
     );
     if (!servico) return res.status(404).json({ erro: "Serviço não encontrado." });
     res.json(servico);
@@ -39,8 +43,9 @@ exports.buscarPorId = async (req, res) => {
 // POST /api/servicos
 exports.criar = async (req, res) => {
   try {
+    const { titulo, descricao, preco, categoria } = req.body;
     const servico = await Servico.create({
-      ...req.body,
+      titulo, descricao, preco, categoria,
       usuario: req.usuario._id,
     });
     res.status(201).json(servico);

@@ -18,7 +18,7 @@ const avaliacaoSchema = new mongoose.Schema(
       required: true,
     },
     nota: { type: Number, required: true, min: 0, max: 5 },
-    comentario: String,
+    comentario: { type: String, maxlength: 2000 },
   },
   { timestamps: { createdAt: "data_criacao" } }
 );

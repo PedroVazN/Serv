@@ -66,7 +66,7 @@ export default function Home() {
               <div aria-hidden="true" className="absolute -right-7 -top-7 z-0 size-28 border border-serv-500/25 sm:-right-10 sm:-top-10 sm:size-36" />
               <figure className="relative z-10 overflow-hidden border-[8px] border-white bg-serv-900 shadow-[0_28px_70px_rgba(42,27,61,.2)] sm:border-[12px]">
                 <div className="relative aspect-[.92] sm:aspect-[1.04]">
-                  <img src="/Assets/dev_front.png" alt="Espaço de trabalho de desenvolvimento de software" className="size-full object-cover" />
+                  <img src="/Assets/editorial/web.webp" alt="Equipe de desenvolvimento colaborando em um projeto digital" width="1440" height="960" fetchpriority="high" decoding="async" className="size-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-serv-950/90 via-transparent to-transparent" />
                   <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-8">
                     <span className="text-xs font-semibold text-serv-200">Equipe digital</span>
@@ -78,7 +78,7 @@ export default function Home() {
               </figure>
               <div className="absolute -bottom-5 -left-3 z-20 hidden items-center gap-3 border border-serv-950/10 bg-white px-4 py-3 shadow-lg sm:flex sm:-bottom-6 sm:-left-7">
                 <div className="flex -space-x-2" aria-hidden="true">
-                  {['/Assets/freelancer1.jpg', '/Assets/freelancer2.jpg', '/Assets/freelancer3.jpg'].map((src, index) => <img key={src} src={src} alt="" className="size-9 border-2 border-white object-cover" style={{ zIndex: 3 - index }} />)}
+                  {['/Assets/editorial/freelancer1-avatar.webp', '/Assets/editorial/freelancer2-avatar.webp', '/Assets/editorial/freelancer3-avatar.webp'].map((src, index) => <img key={src} src={src} alt="" className="size-9 border-2 border-white object-cover" style={{ zIndex: 3 - index }} />)}
                 </div>
                 <span className="text-xs font-bold text-serv-900">Uma equipe, várias habilidades</span>
               </div>
@@ -153,8 +153,8 @@ export default function Home() {
               <h2 className="mt-2 text-3xl font-bold leading-tight tracking-[-.05em] text-serv-950 sm:text-4xl">Trabalho digital ou presencial.</h2>
             </div>
             <div className="grid gap-5 md:grid-cols-2">
-              <ServiceCard image="/Assets/marketing_dig.png" label="Digital" title="Construa sua presença online" description="Desenvolvimento, design, dados e marketing reunidos para o seu produto." onClick={() => navigate('/skillpods')} />
-              <ServiceCard image="/Assets/pedreiro.png" label="Presencial" title="Transforme seu espaço" description="Profissionais para construção, reformas e serviços realizados de perto." onClick={() => navigate('/skillpods')} />
+              <ServiceCard image="/Assets/editorial/marketing.webp" label="Digital" title="Construa sua presença online" description="Desenvolvimento, design, dados e marketing reunidos para o seu produto." onClick={() => navigate('/skillpods')} />
+              <ServiceCard image="/Assets/editorial/reformas.webp" label="Presencial" title="Transforme seu espaço" description="Profissionais para construção, reformas e serviços realizados de perto." onClick={() => navigate('/skillpods')} />
             </div>
           </div>
         </section>
