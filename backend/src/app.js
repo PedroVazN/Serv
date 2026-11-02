@@ -22,14 +22,17 @@ if (serveFrontend && !fs.existsSync(path.join(frontendPath, 'index.html'))) {
 }
 
 const app = express();
+const limiterOptions = process.env.VERCEL === '1'
+  ? { keyGenerator: require('./middleware/vercelRateLimitKey') }
+  : {};
 // Configure apenas os proxies/sub-redes conhecidos da hospedagem; nunca true.
 if (process.env.TRUST_PROXY) app.set('trust proxy', process.env.TRUST_PROXY.split(',').map(value => value.trim()));
 
 // ── Middlewares globais ────────────────────────────────
 app.use(helmet());
 app.use(cors({ origin: (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:5174').split(',') }));
-app.use('/api', rateLimit({ windowMs: 60 * 1000, limit: 300, standardHeaders: 'draft-8', legacyHeaders: false }));
-app.use('/api/auth', rateLimit({ windowMs: 15 * 60 * 1000, limit: 60, standardHeaders: 'draft-8', legacyHeaders: false }));
+app.use('/api', rateLimit({ ...limiterOptions, windowMs: 60 * 1000, limit: 300, standardHeaders: 'draft-8', legacyHeaders: false }));
+app.use('/api/auth', rateLimit({ ...limiterOptions, windowMs: 15 * 60 * 1000, limit: 60, standardHeaders: 'draft-8', legacyHeaders: false }));
 app.use(express.json({ limit: '32kb' }));
 app.disable('x-powered-by');
 // Rejeita IDs inválidos antes de consultar o banco, incluindo rotas aninhadas.
