@@ -21,12 +21,3 @@ Thumbs.db
 
 # Capturas e relatórios locais de design
 .taste-skill/
-
-# Android / Gradle
-Mobile/.gradle/
-Mobile/**/build/
-Mobile/local.properties
-Mobile/.idea/
-Mobile/*.iml
-Mobile/.externalNativeBuild/
-Mobile/.cxx/
