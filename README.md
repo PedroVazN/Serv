@@ -1,76 +1,86 @@
-# Serv — Plataforma de Serviços Freelancer
+# SERV+ - Java, Spring Boot e React
 
-Projeto integrado de uma plataforma para conectar clientes e profissionais prestadores de serviços.
+Plataforma para conectar clientes e profissionais, negociar orçamentos e acompanhar pedidos.
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=fff)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=fff)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=fff)
+## Stack ativa
 
-## Sobre o projeto
+- **Java 21 + Spring Boot 3.5.16:** API REST, Spring Security, JWT HS256, validação de DTOs e Spring Data MongoDB.
+- **React 18 + Vite:** site, cadastro/login, diretórios, perfil, serviços e painéis. A identidade visual roxa foi preservada.
+- **MongoDB:** mantém as coleções, os ObjectIds e os hashes BCrypt já existentes. Atlas ou MongoDB local com replica set.
+- **Maven Wrapper:** compila e testa o backend sem instalar Maven globalmente.
 
-O Serv reúne entregas de diferentes disciplinas: interface web, aplicação desktop Java, modelagem de banco de dados e análise de dados. A proposta é permitir o cadastro e a contratação de serviços oferecidos por freelancers.
+Node.js é utilizado para as ferramentas de build do React. A API ativa é Java; a implementação Express anterior está arquivada em `legacy/backend-node/` para consulta.
 
-## Módulos
+## Executar localmente
 
-- Interface web em React, JavaScript e CSS
-- Telas de cadastro, login, profissionais e contratação
-- Aplicação desktop Java com Swing
-- Cadastro de pessoas, serviços e pedidos
-- Banco de dados relacional
-- Bases CSV e notebook de análise de dados
+Requisitos: **JDK 21**, `JAVA_HOME` apontando para o JDK e Node.js 24 para o frontend.
+
+1. Copie `backend/.env.example` para `backend/.env` se ainda não existir. Configure `MONGODB_URI`, `MONGODB_DB_NAME` e um `JWT_SECRET` aleatório com pelo menos 32 bytes. As variáveis reais do processo têm precedência sobre o arquivo.
+2. Inicie a API, na pasta `backend`:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+Em Linux/macOS: `sh mvnw spring-boot:run`. A API escuta em `http://localhost:3000`; `GET /health` verifica a conexão com o MongoDB.
+
+3. Em outro terminal, na pasta `frontend`:
+
+```powershell
+npm.cmd ci
+npm.cmd run dev -- --port 5174
+```
+
+Abra `http://localhost:5174`. O Vite encaminha `/api` para o Spring Boot. É possível mudar o destino por `API_PROXY_TARGET` em `frontend/.env.local`.
+
+No Windows, `scripts/run-backend.ps1` também compila e inicia a API; `-ServeFrontend` compila o React e serve tudo na porta 3000. O script encontra o JDK portátil em `.tools/`, quando presente nesta máquina. Essa pasta não é versionada; em outra máquina instale o JDK 21.
+
+## Build, testes e execução unificada
+
+Na pasta `backend`, execute:
+
+```powershell
+.\mvnw.cmd verify
+```
+
+Os testes de integração usam `TEST_MONGODB_URI` ou a URI local configurada e **sempre substituem o nome do banco** por `serv_test_spring_<id>`. Requerem permissão para esse banco isolado e suporte a transações. Removem exclusivamente esse banco ao terminar. Os testes cobrem autenticação, isolamento, privacidade, preço do servidor, concorrência no aceite, avaliação, pagamentos de demonstração e administração. A CI usa um replica set descartável local.
+
+```powershell
+npm.cmd --prefix frontend run build
+cd backend
+$env:SERVE_FRONTEND='true'
+java -jar target/serv-api.jar
+```
+
+Nesse modo, `FRONTEND_PATH` é `../frontend/dist`, e o Spring Boot serve o site e a API. O JAR é gerado em `backend/target/serv-api.jar`.
+
+Com Docker e `backend/.env` configurado: `docker compose up --build`. Para um MongoDB inteiramente local, defina `JWT_SECRET` no ambiente e execute `docker compose -f docker-compose.local.yml up --build`; esse modo usa um banco próprio e não acessa o Atlas.
 
 ## Estrutura
 
 ```text
-.
-├── frontend/                # site React + Vite (páginas, componentes e ativos)
-├── backend/                 # API Node.js + MongoDB
-├── Serv/Assets/             # recursos legados do projeto
-├── interfaceServ/           # aplicação Java
-├── LINGUAGEM DE PROGRAMACAO/
-├── BANCO DE DADOS/          # scripts SQL
-└── CIENCIA DE DADOS/        # CSVs e notebook
+backend/src/main/java/br/com/servmais/
+  api/          # Controllers REST, DTOs e erros em JSON
+  service/      # Regras de conta, catálogo, orçamento, pedido e avaliação
+  repository/   # Persistência MongoDB compatível com o banco existente
+  security/     # JWT, principal da conta e proteção de requisições
+  config/       # Spring Security, MongoDB, índices e arquivos React
+backend/src/test/             # JUnit: HTTP real + MongoDB e filtros
+frontend/                    # React + Vite
+legacy/backend-node/         # API anterior, fora da execução ativa
+scripts/                     # Comandos auxiliares
 ```
 
-## Como utilizar
+`interfaceServ/`, `LINGUAGEM DE PROGRAMACAO/`, `BANCO DE DADOS/` e `CIENCIA DE DADOS/` preservam as entregas acadêmicas originais. O SQL e o Swing não são dependências do site atual.
 
-### Interface web
+## Funcionalidades e publicação
 
-O site está implementado em React com Vite. Para executá-lo localmente:
+Cadastro/login, perfis, serviços, orçamento, aceite transacional e idempotente, acompanhamento, conclusão e avaliação foram migrados. As rotas `/api` e os formatos usados pelo React foram mantidos. Não há processador de pagamentos real, recuperação de senha ou contratação coletiva de Skill Pods.
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+`vercel.json` mantém o serviço Vite e muda o backend para runtime de container com `backend/Dockerfile`. Os caminhos `/api/*` e `/health` continuam no mesmo domínio. Vercel Services e Container Runtime são recursos beta; o novo deployment precisa ser validado antes de substituir o serviço publicado.
 
-Acesse `http://localhost:5173`. A interface inclui as páginas inicial, contratação, catálogo de Skill Pods, freelancers e login/cadastro. O login usa a API Node.js descrita abaixo.
+Veja [PRODUCAO.md](PRODUCAO.md) e [CONTRATACAO-INDIVIDUAL.md](CONTRATACAO-INDIVIDUAL.md). As alterações da migração são locais até serem enviadas e publicadas; o código Node atualmente publicado não muda apenas por editar este repositório.
 
-### API e execução com Docker
+## Contexto acadêmico e autor
 
-A API fica em `backend/` e usa MongoDB. Configure `backend/.env` com `MONGODB_URI` e `JWT_SECRET` e então execute `docker compose up --build` na raiz do repositório. Sem Docker, rode `npm install` e `npm run dev` dentro de `backend/`.
-
-### Aplicação Java
-
-```bash
-cd interfaceServ
-mvn clean package
-```
-
-Também é possível importar o projeto Maven no NetBeans e executar a classe principal.
-
-### Banco de dados
-
-Execute `BANCO DE DADOS/QueryCreateInsert.sql` em um servidor MySQL.
-
-### Análise de dados
-
-Abra `CIENCIA DE DADOS/NOTEBOOKS/Serv_análise.ipynb` no Google Colab ou Jupyter Notebook, mantendo os arquivos CSV disponíveis.
-
-## Contexto acadêmico
-
-Projeto integrado do curso superior de Tecnologia em Análise e Desenvolvimento de Sistemas do SENAI 1.23 — Escola SENAI Armando de Arruda Pereira.
-
-## Autor
-
-Desenvolvido por [Pedro Vaz Nascimento](https://github.com/PedroVazN).
+Projeto integrado de Análise e Desenvolvimento de Sistemas, SENAI 1.23 - Escola SENAI Armando de Arruda Pereira. Desenvolvido por [Pedro Vaz Nascimento](https://github.com/PedroVazN).

@@ -5,14 +5,19 @@ RUN npm ci
 COPY frontend/ ./
 RUN npm run build
 
-FROM node:24-alpine AS production
-ENV NODE_ENV=production
-ENV SERVE_FRONTEND=true
-WORKDIR /app/backend
-COPY backend/package.json backend/package-lock.json ./
-RUN npm ci --omit=dev && npm cache clean --force
-COPY --chown=node:node backend/src/ ./src/
-COPY --from=frontend-build --chown=node:node /build/frontend/dist /app/frontend/dist
-USER node
+FROM maven:3.9.12-eclipse-temurin-21 AS backend-build
+WORKDIR /build/backend
+COPY backend/pom.xml ./
+RUN mvn -B dependency:go-offline
+COPY backend/src/ src/
+RUN mvn -B -DskipTests package
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+RUN addgroup -S serv && adduser -S -G serv serv
+COPY --from=backend-build --chown=serv:serv /build/backend/target/serv-api.jar /app/serv-api.jar
+COPY --from=frontend-build --chown=serv:serv /build/frontend/dist/ /app/frontend/
+ENV PORT=3000 SERVE_FRONTEND=true FRONTEND_PATH=/app/frontend JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=70.0 -XX:+ExitOnOutOfMemoryError"
+USER serv
 EXPOSE 3000
-CMD ["node", "src/app.js"]
+ENTRYPOINT ["java", "-jar", "/app/serv-api.jar"]

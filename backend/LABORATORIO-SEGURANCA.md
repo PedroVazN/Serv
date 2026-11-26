@@ -4,16 +4,15 @@ Alvo dos exercícios: a sua API em `http://localhost:3000`. Use contas e pedidos
 
 ## Executar a bateria automatizada
 
-Na pasta `backend`, com a API iniciada por `npm.cmd start`:
+Na pasta `backend`, com JDK 21 e MongoDB configurado em `.env` ou `TEST_MONGODB_URI`:
 
 ```powershell
-node check-database.cjs
-npm.cmd audit
+.\mvnw.cmd verify
 ```
 
-O teste cria usuários cliente e freelancer pelo endpoint público. O administrador temporário é promovido diretamente pelo acesso confiável ao banco, somente para testar rotas administrativas. Não existe cadastro público de administrador. A limpeza apaga apenas os registros desta execução. Não execute várias instâncias simultâneas; o limite de autenticação pode responder 429 em repetições próximas.
+O JUnit inicia uma API Java em porta aleatória e cria um banco exclusivo `serv_test_spring_<id>`. O teste cadastra clientes e profissionais pelo endpoint público e insere um administrador somente nesse banco isolado. Não existe cadastro público de administrador. Ao terminar, remove exclusivamente o banco temporário, conferindo nome e prefixo antes da limpeza. O banco da aplicação não é usado pelo teste.
 
-O arquivo `database-check-results.json` registra o resultado da última execução. Um resultado verde cobre as verificações descritas, não significa ausência de vulnerabilidades.
+Os relatórios ficam em `target/surefire-reports`. Passar nos testes cobre as verificações descritas, não significa ausência de vulnerabilidades. Para os exercícios manuais abaixo, inicie a API em outro terminal com `.\mvnw.cmd spring-boot:run`.
 
 ## Enviar tentativas manualmente no PowerShell
 
@@ -117,4 +116,4 @@ Esperado: **413** pelo limite de 32 KB. A API também limita 300 requisições/m
 6. Reduzir os campos retornados nos perfis públicos, padronizar erros sem detalhes internos e adicionar validação completa dos campos de cada rota.
 7. Executar estes testes em CI, ampliar os casos de acesso cruzado, integridade de referências, concorrência e restauração de backup. O teste atual não é uma auditoria completa.
 
-Referências: [OWASP sobre autorização por objeto](https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/) e [boas práticas de segurança do Express](https://expressjs.com/en/advanced/best-practice-security/).
+Referências: [OWASP sobre autorização por objeto](https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/) e [Spring Security](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/password-encoder.html).

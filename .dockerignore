@@ -13,3 +13,8 @@ Serv
 BANCO DE DADOS
 CIENCIA DE DADOS
 LINGUAGEM DE PROGRAMACAO
+.tools
+tmp
+output
+legacy
+**/target

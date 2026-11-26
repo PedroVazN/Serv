@@ -30,3 +30,7 @@ Mobile/.idea/
 Mobile/*.iml
 Mobile/.externalNativeBuild/
 Mobile/.cxx/
+# Ferramentas locais e arquivos gerados
+.tools/
+tmp/
+output/

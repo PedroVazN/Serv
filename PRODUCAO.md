@@ -1,73 +1,65 @@
-# Publicação do SERV
+# Publicação do SERV+ com Java e React
 
-## Estado atual
+## Versão migrada
 
-Preparação local de implantação: frontend React compilado e servido pelo Express junto com `/api`. MongoDB Atlas continua sendo o banco externo. Não há serviço remoto ou domínio configurado por estes arquivos.
+Backend Java 21/Spring Boot 3.5.16, frontend React/Vite e MongoDB. A migração está no código local: publicar exige enviar as alterações e validar um novo deployment. O serviço público anterior continua independente da execução local.
 
-O catálogo e o diretório de freelancers ainda usam dados fixos. A contratação completa e a cobrança real ainda não estão integradas. Publicar esta versão não transforma esses recursos em funcionalidades completas. Antes de receber clientes reais, concluir esses fluxos e revisar autorização, validações, privacidade, recuperação de senha, backups e monitoramento.
+## Vercel Services
 
-## Implantação com Docker
+`vercel.json` define frontend Vite e backend com `runtime: container` e `entrypoint: Dockerfile`. A imagem do backend é construída em `backend/`. Os caminhos `/api/*` e `/health` mantêm o prefixo e chegam ao Spring Boot; os outros caminhos chegam ao site. O backend abre um servidor HTTP na porta `PORT` (3000 por padrão).
 
-### Vercel
+Services e Container Runtime estão em beta. Referências oficiais consultadas em 25/11/2026:
 
-`vercel.json` na raiz define dois Vercel Services (recurso beta): Vite em `frontend` e Express em `backend`. `/api/*` e `/health` chegam ao backend; as demais rotas chegam ao site. O Express exporta o aplicativo sem abrir porta quando importado pela Vercel, e reutiliza conexões com o Atlas. A execução local por `npm start` continua disponível.
+- https://vercel.com/docs/services
+- https://vercel.com/docs/functions/runtimes/container
 
-O projeto deve apontar para a raiz do repositório. Configure `MONGODB_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN` e `CORS_ORIGINS` nos ambientes desejados. Na Vercel, deixe `SERVE_FRONTEND=false` (ou ausente), pois o frontend é servido pelo serviço Vite. Não copie `.env` para o repositório. Confira as regras de proxy da plataforma antes de configurar `TRUST_PROXY` e revise limites de autenticação em homologação. Segredos de preview devem apontar para banco de homologação, separado do de produção.
+Variáveis do backend, configuradas no ambiente remoto:
 
-A publicação exige equipe acessível na integração e envio das alterações locais ao repositório vinculado. Os testes locais não substituem o build e a verificação do deployment Vercel.
+- `MONGODB_URI`: credencial e endereço do Atlas.
+- `MONGODB_DB_NAME`: nome explícito do banco correto para cada ambiente.
+- `JWT_SECRET`: segredo aleatório com pelo menos 32 bytes; preserve o segredo antigo se quiser manter JWTs ainda válidos.
+- `JWT_EXPIRES_IN`: por exemplo `1h` ou `7d`, máximo 30 dias.
+- `PORT=3000`.
+- `CORS_ORIGINS`: somente as origens reais autorizadas.
+- `SERVE_FRONTEND=false` na Vercel, pois o Vite serve o React separadamente.
 
-Use o `Dockerfile` da **raiz** com contexto da raiz. Ele compila o frontend, instala as dependências travadas no lockfile, copia somente código necessário para execução e usa usuário sem privilégios de root.
+Não transfira `backend/.env` nem segredos de desenvolvimento para o repositório. Não coloque segredos em `VITE_*`, pois o build React é público. Use bancos diferentes para preview e produção. O container não executa seeds nem cadastra contas de demonstração.
 
-```sh
-docker build -t serv-production .
-docker run --rm --env-file /caminho/seguro/serv-production.env -p 3000:3000 serv-production
-```
+## Docker unificado
 
-O arquivo de variáveis fica fora do Git e contém:
-
-```dotenv
-MONGODB_URI=<URI Atlas com banco explicitamente definido>
-JWT_SECRET=<segredo aleatório com pelo menos 32 caracteres>
-JWT_EXPIRES_IN=1h
-PORT=3000
-CORS_ORIGINS=https://seu-dominio-real
-```
-
-`NODE_ENV=production` e `SERVE_FRONTEND=true` já são definidos na imagem. Nunca configure segredos como argumentos de build nem variáveis `VITE_*`: estas últimas ficam públicas no JavaScript do navegador. Não utilize os valores de exemplo como credenciais.
-
-A hospedagem deve encaminhar HTTPS para a porta `PORT` do processo e verificar `/health`. A raiz apresenta o site, `/login` é atendida pelo React e `/api/*` pela API. Para um domínio próprio, configure DNS e certificado no provedor após criar o serviço.
-
-Configure `TRUST_PROXY` com IPs ou sub-redes dos proxies conhecidos somente depois de confirmar a arquitetura do provedor. Sem isso, o limitador pode enxergar todas as pessoas como o mesmo IP atrás do proxy. Não configure confiança irrestrita em cabeçalhos fornecidos pelo cliente. O limitador atual é em memória; para múltiplas instâncias é necessário armazenamento compartilhado.
-
-No Atlas, autorize os endereços de saída da hospedagem e use credencial restrita ao banco do aplicativo. Não abra a lista de IPs indiscriminadamente. Mantenha o laboratório e seus testes separados do banco de produção.
-
-## Alternativa de build sem Docker
-
-Na raiz, execute:
+O Dockerfile da raiz compila React e Java em etapas separadas e executa somente o JRE 21, como usuário sem privilégios. O Spring Boot serve o React compilado e `/api` na mesma porta.
 
 ```sh
-npm --prefix frontend ci
-npm --prefix frontend run build
-npm --prefix backend ci --omit=dev
+docker build -t serv-java .
+docker run --rm --env-file /caminho/seguro/serv.env -p 3000:3000 serv-java
 ```
 
-Inicie `node src/app.js` com diretório de trabalho `backend`, `NODE_ENV=production`, `SERVE_FRONTEND=true` e as variáveis do ambiente configuradas pelo provedor. O artefato deve preservar as pastas irmãs `frontend/dist` e `backend`.
+Também é possível usar `docker compose up --build` com `backend/.env` configurado. A imagem define `SERVE_FRONTEND=true` e `FRONTEND_PATH=/app/frontend`.
 
-## Verificação após publicar
+Sem Docker: compile com `backend/mvnw verify`, gere `frontend/dist` com `npm run build`, e execute `java -jar target/serv-api.jar` a partir de `backend`, com `SERVE_FRONTEND=true`. No Windows, use `mvnw.cmd`. Configure JDK 21 para o build e Java 21 para a execução.
 
-- `/health`: HTTP 200 quando conectado ao MongoDB; 503 se perder a conexão.
-- `/`, `/login` e `/freelancers`: HTML do site.
-- `/api/servicos`: JSON da API.
-- `/api/rota-inexistente`: 404 JSON, não HTML.
-- Testar cadastro/login com conta de homologação e conferir HTTPS, logs e origem CORS.
+## Banco e compatibilidade
 
-O script `backend/check-database.cjs` é de laboratório, cria e remove dados temporários, e não faz parte da imagem de produção. Não o execute no banco de clientes.
+Não há exportação/importação obrigatória do banco. A API mantém as coleções Mongoose, os ObjectIds, referências BSON, timestamps e BCrypt. Os JWTs continuam com HS256 e claim `id`. Os índices são garantidos na inicialização, inclusive unicidade do pedido por orçamento e da avaliação por pedido/serviço. A credencial precisa permitir índices; se houver duplicatas antigas, corrija-as sob revisão antes de publicar.
 
-## Validação realizada nesta preparação
+Aceitar orçamento usa uma transação com retry do driver e índice único, exigindo Atlas ou um replica set. Não use MongoDB standalone para esse fluxo. Faça backup antes da troca de runtime e valide a compatibilidade em homologação.
 
-- Build Vite local gerado com sucesso.
-- Processo de produção iniciado localmente em porta separada e conectado ao Atlas.
-- Docker não está instalado nesta máquina; imagem ainda precisa ser construída e validada pelo provedor ou CI.
-- Publicação remota, TLS, DNS e comportamento dos proxies ainda dependem da hospedagem.
+## Segurança operacional
 
-Referências: [Express: arquivos estáticos](https://expressjs.com/en/starter/static-files/), [Express: proxies](https://expressjs.com/en/guide/behind-proxies/) e [Docker: build em etapas](https://docs.docker.com/build/building/multi-stage/).
+O Spring Security valida JWT e carrega o papel atual da conta. DTOs controlam campos editáveis. Há limite de 32 KiB por corpo JSON, paginação limitada e rejeição de operadores Mongo fornecidos pelo cliente.
+
+O limitador em memória aplica 300 requisições/minuto e 60 tentativas de autenticação/15 minutos por endereço do peer. Cabeçalhos de IP enviados pelo cliente não são confiados. Atrás de proxy ou com múltiplas instâncias, configure também rate limiting compartilhado no ingress/WAF. Não desative a autenticação para testar o acesso ao banco.
+
+No Atlas, restrinja usuários e endereços de saída autorizados. Mantenha TLS, backups e monitoramento. Pagamentos continuam como registros de demonstração, sem cobrança por um provedor real.
+
+## Verificar antes de promover
+
+- `/health`: 200 com MongoDB acessível; 503 quando indisponível.
+- `/api/servicos` e `/api/usuarios/freelancers`: 200 JSON sem dados privados.
+- `/api/orcamentos`, `/api/pedidos`, `/api/auth/me`: 401 sem token.
+- Login de uma conta antiga e acesso ao seu painel.
+- Orçamento, resposta, aceite concorrente e avaliação com contas de homologação.
+- Rotas administrativas negadas para clientes; acesso entre contas negado.
+- `/`, `/login` e rotas profundas carregam o React; arquivos CSS/JS retornam os tipos corretos.
+
+Validação local: build Java, 90 requisições de integração em banco temporário, testes de filtros, build React e login/pedidos antigos no navegador. Docker não está instalado nesta máquina; a imagem e o novo deployment ainda precisam ser construídos e testados no ambiente de hospedagem. A CI em `.github/workflows/verify.yml` foi preparada, mas só executará após envio ao GitHub.

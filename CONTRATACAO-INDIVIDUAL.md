@@ -20,8 +20,7 @@ O `.env` local do backend define `MONGODB_DB_NAME=serv_desenvolvimento`. A URI e
 Na pasta `backend`:
 
 ```powershell
-npm.cmd run demo:local
-npm.cmd run dev
+.\mvnw.cmd spring-boot:run
 ```
 
 Na pasta `frontend`:
@@ -36,9 +35,9 @@ Contas **apenas da demonstração local**:
 - Profissional: `profissional.demo@example.invalid`
 - Senha dessas duas contas fictícias: `ServDemo2026!`
 
-O script de demonstração recusa execução em produção, na Vercel ou fora de `serv_desenvolvimento`. Não altera contas reais nem redefine senhas de contas existentes. Para cadastrar uma conta comum, use o formulário de criação de conta.
+As contas acima já existiam no banco local antes da migração e continuam compatíveis com o Spring Boot. O seed antigo está arquivado em `legacy/backend-node/scripts/` e não faz parte da execução Java. Em um banco novo, use o formulário de cadastro; a aplicação não cria contas de demonstração automaticamente.
 
-O teste de integração `npm.cmd run test:marketplace` cria um banco exclusivo `serv_test_marketplace_<timestamp>`, verifica privacidade, autorização, aceites concorrentes, estados, preço acordado e avaliação, e remove somente esse banco ao terminar. Requer credenciais com permissão para o banco temporário e suporte a transações (como Atlas). `check-database.cjs` agora exige explicitamente o banco de desenvolvimento e continua limitado aos registros temporários identificados pelo próprio teste.
+O teste de integração `.\mvnw.cmd verify` cria um banco exclusivo `serv_test_spring_<id>`, verifica privacidade, autorização, aceites concorrentes, estados, preço acordado e avaliação, e remove somente esse banco ao terminar. Requer credenciais com permissão para o banco temporário e suporte a transações (como Atlas). Use `TEST_MONGODB_URI` para uma URI de testes específica. Os scripts Node de laboratório foram arquivados e substituídos pelos testes JUnit.
 
 ## Novos endpoints
 
