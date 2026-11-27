@@ -7,6 +7,7 @@ import Login from './pages/Login/Login'
 import { AuthProvider } from './context/AuthContext'
 import { FreelancersDirectory, ServicesDirectory, ProfessionalProfile, ServiceDetail } from './pages/Marketplace/Directory'
 import Dashboard from './pages/Marketplace/Dashboard'
+import TelegramAssistant from './components/TelegramAssistant/TelegramAssistant'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/login"       element={<Login />} />
         <Route path="*"            element={<NotFound />} />
       </Routes>
+      <TelegramAssistant />
       </AuthProvider>
     </BrowserRouter>
   )

@@ -1,0 +1,70 @@
+.telegram-assistant-trigger {
+  position: fixed;
+  z-index: 900;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-height: 54px;
+  padding: 14px 21px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  color: #fff;
+  background: var(--purple-600);
+  box-shadow: 0 6px 24px rgba(26, 15, 46, .2);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  transition: background .2s, transform .2s;
+}
+.telegram-assistant-trigger:hover { background: var(--purple-700); transform: translateY(-2px); }
+.telegram-assistant-trigger:active { transform: translateY(0); }
+.telegram-assistant-trigger svg { flex: none; }
+.telegram-assistant-dialog {
+  position: fixed;
+  inset: auto 24px 94px auto;
+  width: min(380px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 118px);
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--purple-100);
+  border-radius: 22px;
+  background: #fff;
+  color: var(--serv-ink);
+  box-shadow: 0 18px 60px rgba(26, 15, 46, .25);
+}
+.telegram-assistant-dialog[open] { animation: telegram-assistant-arrive .2s ease-out; }
+.telegram-assistant-dialog::backdrop { background: rgba(26, 15, 46, .32); }
+.telegram-assistant-header { display: flex; align-items: center; gap: 12px; padding: 22px 18px 22px 24px; background: var(--purple-950); color: #fff; }
+.telegram-assistant-mark { display: grid; place-content: center; position: relative; width: 44px; height: 44px; flex: none; border: 1px solid rgba(196, 181, 253, .3); border-radius: 14px; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; }
+.telegram-assistant-mark > span { position: absolute; top: 3px; right: 6px; color: var(--purple-200); font-size: 15px; }
+.telegram-assistant-header h2 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3; letter-spacing: -.03em; }
+.telegram-assistant-header p { margin-top: 5px; color: var(--purple-200); font-size: 12px; }
+.telegram-assistant-close { display: grid; place-content: center; flex: none; width: 44px; height: 44px; margin-left: auto; border: 0; border-radius: 50%; background: transparent; color: #fff; }
+.telegram-assistant-close:hover { background: rgba(255, 255, 255, .12); }
+.telegram-assistant-close:focus-visible { --tw-ring-offset-color: var(--purple-950); }
+.telegram-assistant-body { padding: 26px 24px 22px; }
+.telegram-assistant-greeting { margin: 0 0 12px; font-family: 'Space Grotesk', sans-serif; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -.04em; }
+#telegram-assistant-description { margin: 0; font-size: 14px; line-height: 1.8; color: var(--purple-900); }
+.telegram-assistant-handle { margin: 20px 0; overflow-wrap: anywhere; font-size: 11px; font-weight: 600; color: var(--purple-700); }
+.telegram-assistant-link { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 14px 16px; border-radius: 12px; background: var(--purple-600); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .2s; }
+.telegram-assistant-link:hover { background: var(--purple-700); }
+.telegram-assistant-link > svg { flex: none; }
+.telegram-assistant-link > span:last-child { margin-left: auto; }
+.telegram-assistant-note { margin-top: 12px; text-align: center; font-size: 11px; line-height: 1.6; color: var(--purple-700); }
+@keyframes telegram-assistant-arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 480px) {
+  .telegram-assistant-trigger { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); min-height: 50px; padding: 12px 16px; font-size: 12px; }
+  .telegram-assistant-dialog { right: 16px; bottom: 82px; max-height: calc(100dvh - 106px); }
+  .telegram-assistant-header { padding: 18px 14px 18px 20px; }
+  .telegram-assistant-body { padding: 24px 20px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .telegram-assistant-dialog[open] { animation: none; }
+  .telegram-assistant-trigger, .telegram-assistant-link { transition: none; }
+}
